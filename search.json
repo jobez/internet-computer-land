@@ -1,0 +1,9 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "",
+    "section": "",
+    "text": "mutable wallet = null;\n\n\n\n\n\n\n\nasync function connectWallet(e)  {\n    mutable wallet =  await get_starknet.connect();\n    await wallet.enable()\n}\n\n\n\n\n\n\n\nIncredible Wallet Button\n\nviewof counter = Inputs.button([\n  [\"connect\", connectWallet]\n], {value: 0, label: \"wallet thing\"})"
+  }
+]

@@ -4,6 +4,6 @@
     "href": "index.html",
     "title": "",
     "section": "",
-    "text": "mutable wallet = null;\n\n\n\n\n\n\n\nasync function connectWallet(e)  {\n    mutable wallet =  await get_starknet.connect();\n    await wallet.enable()\n}\n\n\n\n\n\n\n\nIncredible Wallet Button\n\nviewof counter = Inputs.button([\n  [\"connect\", connectWallet]\n], {value: 0, label: \"wallet thing\"})"
+    "text": "mutable wallet = null;\n\n\n\n\n\n\n\nasync function connectWallet(e)  {\n   var wall =  await get_starknet.connect();\n   await wall.enable();\n   mutable wallet = wall;\n   }\n\n\n\n\n\n\n\nasync function enableWallet(e)  {\n   await wallet.enable();\n   }\n\n\n\n\n\n\n\nIncredible Wallet Button\n\nviewof connect = Inputs.button([\n  [\"connect\", connectWallet],\n], {value: 0, label: \"wallet thing\"})\n\n\n\n\n\n\n\ncontract = {\nwallet;\nvar abi = await FileAttachment(\"example.json\").json()\nconsole.log(abi);\nreturn (new starknetjs.Contract(abi, \"0x036486801b8f42e950824cba55b2df8cccb0af2497992f807a7e1d9abd2c6ba1\", wallet.account))\n\n}\n\n\n\n\n\n\n\ncount = contract.counter()\n\n\n\n\n\n\n\nmd`${count} is the count`"
   }
 ]

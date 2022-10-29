@@ -173,7 +173,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="incredible-counting-on-internet-computers" class="level1">
 <h1>incredible counting on internet computers</h1>
-<p>I’ll start with a brief little ‘how to’ guide of building a ui that can ‘reach out’ to a browser extension wallet and then ‘do things with’ a contract on starknet. Then I’ll try to probe some of the theory of how that is happening.</p>
+<p>I’ll start with a brief little ‘how to’ guide of building a ui that can ‘reach out’ to a browser extension wallet and then ‘do things with’ a contract on starknet. If you think some other technology is way better than starknet, take a deep breath and treat this as me simply using one instance of the general class of <sub><em>internet computers</em></sub>. Then, in a following section, I’ll try to probe some of the theory of how that is happening.</p>
 <p>There is a little bit of incidental detail that I’ll ellide here, as I am using <a href="https://quarto.org">Quarto</a> which (in turn) lets me use <a href="https://quarto.org/docs/computations/ojs.html">observable</a> for computation. We can kind of squint and treat it as ‘just’ javascript and I’ll defer all the details on how it isn’t to the creators <a href="https://observablehq.com/@observablehq/observables-not-javascript">here</a>.</p>
 <p>We will see how well observable plays with contract interop. Here we only break a little ground and in subsequent iterations.</p>
 <p>So we start by pulling in <code>starknetjs</code> and <code>get_starknet</code></p>
@@ -295,13 +295,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </div>
+</section>
+<section id="communication-between-users-applications-blockchains" class="level1">
+<h1>communication between users, applications, blockchains</h1>
+<p>A wallet gives a user an account on a given blockchain. But implicitly it offers a way for users to communicate with it.</p>
+<p>How?</p>
+<p>Let’s investigate our <code>wallet</code> object again.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" data-startfrom="100" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 99;"><span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a>wallet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-12" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<p>What are these attributes of <code>account</code> and <code>provider</code>?</p>
+<p>A provider lets you interact with the network without signing transactions, which basically means it gives you read access.</p>
+<p>When we want write access, we communicate with our account to, in Starknet’s case, the sequencer node.</p>
+<p>But how is this communication done?</p>
+<p>We can be so bold as to look at <a href="https://github.com/0xs34n/starknet.js/blob/develop/src/provider/rpc.ts">starknetjs source</a> and see that the provider object using an rpc protocol against the provider endpoint.</p>
+<p>Same deal with the <a href="https://github.com/0xs34n/starknet.js/blob/develop/src/provider/sequencer.ts">sequencer</a>, but it also seems that some functionality is exposed as http endpoints, i.e.&nbsp;<a href="https://github.com/0xs34n/starknet.js/blob/develop/src/provider/sequencer.ts#L235">callContract</a></p>
+<p>So let’s try to follow what is happening when a user interacts with a contract on a web client.</p>
+<p>Essentially, starknet-js takes ownership of coordinating users to the right remote calls. In a mature blockchain ecologies, the remote calls are to an open class of processes, where processes can perform certain roles like having access to the full history of blockchain transactions or simply accepting/relaying transactions and participating in consensus.</p>
+<p>So when I click the increment button and get back a transaction hash, the user’s action/agency is given an identifiable ticket in a queue of transactions that need to make it to a block for it to be finalized.</p>
+<p>A couple things stand out–one, is that ‘reads’ from a contract need to have some awareness of the state of users transactions of the contract at the very least, let alone the possible transactions of other users. This is something I’ll explore in subsequent posts.</p>
+<p>I am still unsure how well observablehq’s reactive constructs will play with ‘hooking’ into a blockchain contracts. The allure of starting out with it is offers me more joy than the full gamut react or whatever hell else is popular in js land.</p>
+<p>We will see if there’s a hard limit.</p>
+<p>Another is, having had a little experience with the early nft wave of Solana, when you are so lucky to have a ‘surge’ of users trying to submit transactions against the same node/rpc, you aren’t going to have a good time. There were a lot of cases of quiet failure.</p>
+<p>So the question of the best of all ways to provide your users the smoothest experience with a blockchain might involve a little devops.</p>
+<p>Onward.</p>
 
 
 </section>
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"starknetjs = import(\"https://jspm.dev/starknet\")\nget_starknet = import(\"https://jspm.dev/get-starknet\")\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"async function connectWallet(e)  {\n   var wallet =  await get_starknet.connect();\n   await wallet.enable();\n   return wallet;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"wallet ? md`${wallet.selectedAddress}, you achieved things. You pushed through. You did it.` : md`Come on. All you need to do is install a browser plugin. You can do it.`\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"viewof wallet = Inputs.button(\"Connect\", {value: null, reduce: connectWallet})\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"wallet\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"contract = {\nvar abi = await FileAttachment(\"../counter_abi.json\").json()\nreturn wallet ? (new starknetjs.Contract(abi, \"0x036486801b8f42e950824cba55b2df8cccb0af2497992f807a7e1d9abd2c6ba1\", wallet.account)) : null\n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"contract ? md`${contract.counter()} is the count` : null\n"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"async function callIncrement(e)  {\n   var txn = await contract.incrementCounter(1);\n   return txn;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"viewof incrementTxn = Inputs.button(\"increment\", {value: null, reduce: callIncrement})\n"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"incrementTxn\n"},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"contract\n"},{"methodName":"interpretQuiet","source":"shinyInput('wallet')"},{"methodName":"interpretQuiet","source":"shinyInput('incrementTxn')"}]}
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"starknetjs = import(\"https://jspm.dev/starknet\")\nget_starknet = import(\"https://jspm.dev/get-starknet\")\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"async function connectWallet(e)  {\n   var wallet =  await get_starknet.connect();\n   await wallet.enable();\n   return wallet;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"wallet ? md`${wallet.selectedAddress}, you achieved things. You pushed through. You did it.` : md`Come on. All you need to do is install a browser plugin. You can do it.`\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"viewof wallet = Inputs.button(\"Connect\", {value: null, reduce: connectWallet})\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"wallet\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"contract = {\nvar abi = await FileAttachment(\"../counter_abi.json\").json()\nreturn wallet ? (new starknetjs.Contract(abi, \"0x036486801b8f42e950824cba55b2df8cccb0af2497992f807a7e1d9abd2c6ba1\", wallet.account)) : null\n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"contract ? md`${contract.counter()} is the count` : null\n"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"async function callIncrement(e)  {\n   var txn = await contract.incrementCounter(1);\n   return txn;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"viewof incrementTxn = Inputs.button(\"increment\", {value: null, reduce: callIncrement})\n"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"incrementTxn\n"},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"contract\n"},{"methodName":"interpret","cellName":"ojs-cell-12","inline":false,"source":"wallet\n"},{"methodName":"interpretQuiet","source":"shinyInput('wallet')"},{"methodName":"interpretQuiet","source":"shinyInput('incrementTxn')"}]}
 </script>
 <script type="module">
 window._ojs.paths.runtimeToDoc = "../../posts/0_hello_wallet";

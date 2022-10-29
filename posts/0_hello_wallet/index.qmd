@@ -1,0 +1,91 @@
+---
+title: "hello, wallet"
+---
+
+# incredible counting on internet computers
+
+I'll start with a brief little 'how to' guide of building a ui that can 'reach out' to a browser extension wallet and then 'do things with' a contract on starknet. Then I'll try to probe some of the theory of how that is happening.
+
+There is a little bit of incidental detail that I'll ellide here, as I am using [Quarto](https://quarto.org) which (in turn) lets me use [observable](https://quarto.org/docs/computations/ojs.html) for computation. We can kind of squint and treat it as 'just' javascript and I'll defer all the details on how it isn't to the creators [here](https://observablehq.com/@observablehq/observables-not-javascript).
+
+We will see how well observable plays with contract interop. Here we only break a little ground and in subsequent iterations.
+
+So we start by pulling in `starknetjs` and `get_starknet`
+```{ojs}
+starknetjs = import("https://jspm.dev/starknet")
+get_starknet = import("https://jspm.dev/get-starknet")
+```
+
+Then we write a async function that uses `get_starknet` to display to a user an interface for selecting and consenting a wallet and a given account to a session.
+
+```{ojs}
+async function connectWallet(e)  {
+   var wallet =  await get_starknet.connect();
+   await wallet.enable();
+   return wallet;
+}
+```
+
+And consider this some boiler plate for observable to give me a little button view that, on clicked, will present aforementioned wallet interface.
+
+```{ojs}
+//| echo: false
+wallet ? md`${wallet.selectedAddress}, you achieved things. You pushed through. You did it.` : md`Come on. All you need to do is install a browser plugin. You can do it.`
+```
+
+
+```{ojs}
+viewof wallet = Inputs.button("Connect", {value: null, reduce: connectWallet})
+```
+
+If you had the audacity to push through the resistance and actually install a browser plugin wallet, you can see that its object unifies a 
+couple of abstractions we will get into in the question of how a client and contract on a chain interact: `account` and `provider`
+
+
+```{ojs}
+wallet
+```
+
+With a wallet, we can construct an interface to a contract that 'lives' on a chain. We also need said contracts `abi` which is the contract's application binary interface and the contracts address.
+
+The abi is constructed when you compile a cairo contract and the address is generated from the deployment of a contract to a chain.
+
+
+```{ojs}
+contract = {
+var abi = await FileAttachment("../counter_abi.json").json()
+return wallet ? (new starknetjs.Contract(abi, "0x036486801b8f42e950824cba55b2df8cccb0af2497992f807a7e1d9abd2c6ba1", wallet.account)) : null
+
+}
+```
+
+Here we call a view method, basically reading state from the contract. Observable has some magic that lets me treat promises like regular statements, but everything 'across' the contract interaction is asynchronous.
+
+```{ojs}
+contract ? md`${contract.counter()} is the count` : null
+```
+
+Increment counter mutates the contract state. 
+
+```{ojs}
+//| echo: false
+async function callIncrement(e)  {
+   var txn = await contract.incrementCounter(1);
+   return txn;
+}
+```
+Invoking it gives us an object with a transaction hash.
+
+```{ojs}
+viewof incrementTxn = Inputs.button("increment", {value: null, reduce: callIncrement})
+```
+What's going on? What's happening? What is this magic?
+
+```{ojs}
+incrementTxn
+```
+
+```{ojs}
+contract
+```
+ 

@@ -1,54 +1,13 @@
-```{ojs}
-//| echo: false
-starknetjs = import("https://jspm.dev/starknet")
-get_starknet = import("https://jspm.dev/get-starknet")
-```
+---
+title: "internet computer land"
+subtitle: journey in the possibilities of internet computers
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+---
 
-```{ojs}
-//| echo: false
-mutable wallet = null;
-```
-
-```{ojs}
-//| echo: false
-async function connectWallet(e)  {
-   var wall =  await get_starknet.connect();
-   await wall.enable();
-   mutable wallet = wall;
-   }
-```
-
-```{ojs}
-//| echo: false
-async function enableWallet(e)  {
-   await wallet.enable();
-   }
-```
-
-# Incredible Wallet Button
-```{ojs}
-//| echo: false
-viewof connect = Inputs.button([
-  ["connect", connectWallet],
-], {value: 0, label: "wallet thing"})
-```
-
-
-
-```{ojs}
-contract = {
-wallet;
-var abi = await FileAttachment("example.json").json()
-console.log(abi);
-return (new starknetjs.Contract(abi, "0x036486801b8f42e950824cba55b2df8cccb0af2497992f807a7e1d9abd2c6ba1", wallet.account))
-
-}
-```
-
-```{ojs}
-count = contract.counter()
-```
-
-```{ojs}
-md`${count} is the count`
-```

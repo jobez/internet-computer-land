@@ -4,7 +4,7 @@ title: "hello, wallet"
 
 # incredible counting on internet computers
 
-I'll start with a brief little 'how to' guide of building a ui that can 'reach out' to a browser extension wallet and then 'do things with' a contract on starknet. Then I'll try to probe some of the theory of how that is happening.
+I'll start with a brief little 'how to' guide of building a ui that can 'reach out' to a browser extension wallet and then 'do things with' a contract on starknet. If you think some other technology is way better than starknet, take a deep breath and treat this as me simply using one instance of the general class of ~*internet computers*~.  Then, in a following section, I'll try to probe some of the theory of how that is happening.
 
 There is a little bit of incidental detail that I'll ellide here, as I am using [Quarto](https://quarto.org) which (in turn) lets me use [observable](https://quarto.org/docs/computations/ojs.html) for computation. We can kind of squint and treat it as 'just' javascript and I'll defer all the details on how it isn't to the creators [here](https://observablehq.com/@observablehq/observables-not-javascript).
 
@@ -89,3 +89,44 @@ incrementTxn
 contract
 ```
  
+# communication between users, applications, blockchains
+
+A wallet gives a user an account on a given blockchain. But implicitly it offers a way for users to communicate with it.
+
+How?
+
+Let's investigate our `wallet` object again.
+
+```{ojs}
+wallet
+```
+
+What are these attributes of `account` and `provider`?
+
+A provider lets you interact with the network without signing transactions, which basically means it gives you read access.
+
+When we want write access, we communicate with our account to, in Starknet's case, the sequencer node.
+
+But how is this communication done?
+
+We can be so bold as to look at [starknetjs source](https://github.com/0xs34n/starknet.js/blob/develop/src/provider/rpc.ts) and see that the provider object using an rpc protocol against the provider endpoint. 
+
+Same deal with the [sequencer](https://github.com/0xs34n/starknet.js/blob/develop/src/provider/sequencer.ts), but it also seems that some functionality is exposed as http endpoints, i.e. [callContract](https://github.com/0xs34n/starknet.js/blob/develop/src/provider/sequencer.ts#L235)
+
+So let's try to follow what is happening when a user interacts with a contract on a web client.
+
+Essentially, starknet-js takes ownership of coordinating users to the right remote calls. In a mature blockchain ecologies, the remote calls are to an open class of processes, where processes can perform certain roles like having access to the full history of blockchain transactions or simply accepting/relaying transactions and participating in consensus.
+
+So when I click the increment button and get back a transaction hash, the user's action/agency is given an identifiable ticket in a queue of transactions that need to make it to a block for it to be finalized.
+
+A couple things stand out--one, is that 'reads' from a contract need to have some awareness of the state of users transactions of the contract at the very least, let alone the possible transactions of other users. This is something I'll explore in subsequent posts.
+
+I am still unsure how well observablehq's reactive constructs will play with 'hooking' into a blockchain contracts. The allure of starting out with it is offers me more joy than the full gamut react or whatever hell else is popular in js land. 
+
+We will see if there's a hard limit. 
+
+Another is, having had a little experience with the early nft wave of Solana, when you are so lucky to have a 'surge' of users trying to submit transactions against the same node/rpc, you aren't going to have a good time. There were a lot of cases of quiet failure.
+
+So the question of the best of all ways to provide your users the smoothest experience with a blockchain might involve a little devops.
+
+Onward.

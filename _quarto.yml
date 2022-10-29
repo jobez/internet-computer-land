@@ -1,0 +1,9 @@
+execute:
+  freeze: auto
+
+project:
+    type: website
+    output-dir: docs
+  
+metadata-files:
+  - _website.yml  

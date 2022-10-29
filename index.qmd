@@ -1,0 +1,26 @@
+```{ojs}
+//| echo: false
+starknetjs = import("https://jspm.dev/starknet")
+get_starknet = import("https://jspm.dev/get-starknet")
+```
+
+```{ojs}
+//| echo: false
+mutable wallet = null;
+```
+
+```{ojs}
+//| echo: false
+async function connectWallet(e)  {
+    mutable wallet =  await get_starknet.connect();
+    await wallet.enable()
+}
+```
+# Incredible Wallet Button
+```{ojs}
+//| echo: false
+viewof counter = Inputs.button([
+  ["connect", connectWallet]
+], {value: 0, label: "wallet thing"})
+```
+

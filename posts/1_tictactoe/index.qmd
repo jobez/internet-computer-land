@@ -1,0 +1,193 @@
+---
+title: "bitwise tictactoe"
+---
+
+Do I need to write text?
+
+```{ojs}
+//| panel: sidebar
+//| echo: false
+
+import { connectWallet  } from "/posts/0_hello_wallet/index.qmd";
+d3 = require("d3@6");
+
+viewof wallet = Inputs.button("Connect", {value: null, reduce: connectWallet})
+
+viewof game_id = Inputs.range([0, 255], {step: 1, label: "Game Id"})
+
+
+viewof counter = Inputs.button([
+  ["Create", value => (e) => console.log("create")],
+  ["Join", value => (e) => console.log("join")]
+
+], {value: 0, label: "Game"})
+
+```
+
+
+::: {.panel-tabset}
+## game
+```{ojs}
+//| echo: false
+__card = renderGame()
+```
+:::
+
+
+## tic tac toe
+
+There is a cool solidity tutorial that goes through implementing [tictactoe](https://book.tictactoken.co/) which inspired me to try to do a tictactoe web client and cairo/starknet contract.
+
+There was [an excellent observablehq notebook](https://observablehq.com/@alaricmoore/tic-tac-toe)  that I am only slightly editing here. It really demonstrates observablehq's really elegant async abstractions, [generators](https://observablehq.com/@observablehq/introduction-to-generators).
+
+I won't go to into them here, but I am hopeful/curious about whether these abstractions can give good flexibility in working with the inherently asynchronous nature of blockchain interaction.
+
+## whats in a game?
+
+How do we represent a game of tictactoe?
+
+```
+struct Game {
+    player_x: felt,
+    player_o: felt,
+    state_x: felt,
+    state_o: felt,
+    completed: felt,
+}
+```
+
+
+
+### coordinating game session
+
+A game needs two players. Since the game is going to be played 'across' a contract, we need to allow one player to create and invite another player to a game.
+
+
+```{ojs}
+async function* renderGame() {
+  const state = createState();
+  while (true) {
+    let body = null;
+    const p = new Promise((resolve) => {
+      body = renderGrid(state, resolve);
+    });
+
+    yield body;
+    await p;
+  }
+}
+```
+
+```{ojs}
+function renderBox(cellValue, onClick) {
+  //const charLut = [``, X_PLAYER, O_PLAYER];
+  // const charLut = ['', 'X', 'O']; 
+  const box = html`
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        border: 2px black solid;
+        user-select: none;
+      ">
+     <div style="font-size: 5em">${charLut[cellValue]}</div>
+  </div>`;
+
+  box.addEventListener("click", onClick);
+  //render box cares not about what the clicking does
+  return box;
+}
+```
+
+```{ojs}
+
+renderGrid = (state, onChange) =>
+  html`
+  <div style="display:flex; flex-direction: column; justify-content: center; align-items: center;">
+    <h1 style="font-size: 5em;color: red">Tic-Tac-Toe</h1>
+    <h2> Winner is ${charLut[state.winner]}</h2> 
+    <div style="
+      display:inline-flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid black;
+    ">${d3.range(GRID_WIDTH).map((row) => {
+      return html`<div>${d3.range(GRID_HEIGHT).map((col) =>
+        renderBox(state.board[col][row], () => {
+          handleTurn(state, col, row); //state[col][row] = (state[col][row] + 1) % 3;
+          onChange();
+          //}
+        })
+      )}`;
+    })}
+    </div>
+  </div>`
+
+```
+
+```{ojs}
+function cr_to_binary(col, row) {
+    var increase;
+    switch (col) {
+        case 0: 
+            increase = 0;
+            break;
+        case 1:
+            increase = 3;
+            break;
+        case 2:
+            increase = 6
+;
+
+    }
+    
+    var binary_idx = row + increase;
+    return Math.pow(2, binary_idx);
+}
+```
+
+```{ojs}
+function handleTurn(state, col, row) {
+  if (state.board[col][row] === 0) {
+    if (state.turn % 2 === 0) {
+      state.board[col][row] = X_PLAYER;
+      state.x_player_state = state.x_player_state + cr_to_binary(col, row)
+    } else {
+      state.board[col][row] = O_PLAYER;
+      state.o_player_state = state.o_player_state + cr_to_binary(col, row)      
+    }
+    state.turn++;
+    // winGame(state);
+    console.log(state, col, row);
+  }
+}
+
+```
+
+```{ojs}
+charLut = ["", "X", "O", "neither"]
+```
+
+```{ojs}
+createState = () => {
+  const board = d3
+    .range(GRID_HEIGHT)
+    .map(() => d3.range(GRID_WIDTH).map(() => 0));
+  //state[2][2] = 1;
+  return { board, turn: 0, winner: 0, x_player_state: 0, o_player_state: 0 };
+}
+```
+
+```{ojs}
+//| echo: false
+GRID_WIDTH = 3
+GRID_HEIGHT = 3
+X_PLAYER = 1
+X_PLAYER_STATE = 0
+O_PLAYER = 2
+O_PLAYER_STATE = 0
+NEITHER = 3
+```

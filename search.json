@@ -1,5 +1,26 @@
 [
   {
+    "objectID": "posts/1_tictactoe/index.html",
+    "href": "posts/1_tictactoe/index.html",
+    "title": "bitwise tictactoe",
+    "section": "",
+    "text": "Do I need to write text?"
+  },
+  {
+    "objectID": "posts/1_tictactoe/index.html#tic-tac-toe",
+    "href": "posts/1_tictactoe/index.html#tic-tac-toe",
+    "title": "bitwise tictactoe",
+    "section": "tic tac toe",
+    "text": "tic tac toe\nThere is a cool solidity tutorial that goes through implementing tictactoe which inspired me to try to do a tictactoe web client and cairo/starknet contract.\nThere was an excellent observablehq notebook that I am only slightly editing here. It really demonstrates observablehq’s really elegant async abstractions, generators.\nI won’t go to into them here, but I am hopeful/curious about whether these abstractions can give good flexibility in working with the inherently asynchronous nature of blockchain interaction."
+  },
+  {
+    "objectID": "posts/1_tictactoe/index.html#whats-in-a-game",
+    "href": "posts/1_tictactoe/index.html#whats-in-a-game",
+    "title": "bitwise tictactoe",
+    "section": "whats in a game?",
+    "text": "whats in a game?\nHow do we represent a game of tictactoe?\nstruct Game {\n    player_x: felt,\n    player_o: felt,\n    state_x: felt,\n    state_o: felt,\n    completed: felt,\n}\n\ncoordinating game session\nA game needs two players. Since the game is going to be played ‘across’ a contract, we need to allow one player to create and invite another player to a game.\n\nasync function* renderGame() {\n  const state = createState();\n  while (true) {\n    let body = null;\n    const p = new Promise((resolve) => {\n      body = renderGrid(state, resolve);\n    });\n\n    yield body;\n    await p;\n  }\n}\n\n\n\n\n\n\n\nfunction renderBox(cellValue, onClick) {\n  //const charLut = [``, X_PLAYER, O_PLAYER];\n  // const charLut = ['', 'X', 'O']; \n  const box = html`\n    <div\n      style=\"\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        width: 100px;\n        height: 100px;\n        border: 2px black solid;\n        user-select: none;\n      \">\n     <div style=\"font-size: 5em\">${charLut[cellValue]}</div>\n  </div>`;\n\n  box.addEventListener(\"click\", onClick);\n  //render box cares not about what the clicking does\n  return box;\n}\n\n\n\n\n\n\n\nrenderGrid = (state, onChange) =>\n  html`\n  <div style=\"display:flex; flex-direction: column; justify-content: center; align-items: center;\">\n    <h1 style=\"font-size: 5em;color: red\">Tic-Tac-Toe</h1>\n    <h2> Winner is ${charLut[state.winner]}</h2> \n    <div style=\"\n      display:inline-flex;\n      justify-content: center;\n      align-items: center;\n      border: 2px solid black;\n    \">${d3.range(GRID_WIDTH).map((row) => {\n      return html`<div>${d3.range(GRID_HEIGHT).map((col) =>\n        renderBox(state.board[col][row], () => {\n          handleTurn(state, col, row); //state[col][row] = (state[col][row] + 1) % 3;\n          onChange();\n          //}\n        })\n      )}`;\n    })}\n    </div>\n  </div>`\n\n\n\n\n\n\n\nfunction cr_to_binary(col, row) {\n    var increase;\n    switch (col) {\n        case 0: \n            increase = 0;\n            break;\n        case 1:\n            increase = 3;\n            break;\n        case 2:\n            increase = 6\n;\n\n    }\n    \n    var binary_idx = row + increase;\n    return Math.pow(2, binary_idx);\n}\n\n\n\n\n\n\n\nfunction handleTurn(state, col, row) {\n  if (state.board[col][row] === 0) {\n    if (state.turn % 2 === 0) {\n      state.board[col][row] = X_PLAYER;\n      state.x_player_state = state.x_player_state + cr_to_binary(col, row)\n    } else {\n      state.board[col][row] = O_PLAYER;\n      state.o_player_state = state.o_player_state + cr_to_binary(col, row)      \n    }\n    state.turn++;\n    // winGame(state);\n    console.log(state, col, row);\n  }\n}\n\n\n\n\n\n\n\ncharLut = [\"\", \"X\", \"O\", \"neither\"]\n\n\n\n\n\n\n\ncreateState = () => {\n  const board = d3\n    .range(GRID_HEIGHT)\n    .map(() => d3.range(GRID_WIDTH).map(() => 0));\n  //state[2][2] = 1;\n  return { board, turn: 0, winner: 0, x_player_state: 0, o_player_state: 0 };\n}\n\n\n\n\n\n\n\nGRID_WIDTH = 3\nGRID_HEIGHT = 3\nX_PLAYER = 1\nX_PLAYER_STATE = 0\nO_PLAYER = 2\nO_PLAYER_STATE = 0\nNEITHER = 3"
+  },
+  {
     "objectID": "posts/0_hello_wallet/index.html",
     "href": "posts/0_hello_wallet/index.html",
     "title": "hello, wallet",

@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/1_tictactoe/index.html",
       "/posts/0_hello_wallet/index.html"
     ]
   }

@@ -6,7 +6,7 @@ title: "bitwise tictactoe"
 //| echo: false
 contract = {
 var abi = await FileAttachment("tictactoe_abi.json").json()
-return wallet ? (new starknetjs.Contract(abi, "0x02386219c8ca466b820f56426c444b8eb157156d49795eaaeb37f9dbdf589430",
+return wallet ? (new starknetjs.Contract(abi, "0x02d73095244b035d7eae13918444cf9938ad7cf0c1a985e13d927ca670c2b111",
 wallet.account)) : null
 
 }
@@ -23,7 +23,7 @@ d3 = require("d3@6");
 
 viewof wallet = Inputs.button("Connect", {value: null, reduce: connectWallet})
 
-viewof game_id = Inputs.range([0, 255], {step: 1, label: "Game Id"})
+viewof game_id = Inputs.range([1, 255], {step: 1, label: "Game Id"})
 
 async function createGame(v) {
     var txn = await contract.init_new_game()
@@ -61,32 +61,62 @@ __card = renderGame()
 ## debugging
 
 ```{ojs}
-txn_state
+wallet.selectedAddress
 
-```
-
-```{ojs}
-txn_status = pollTxn(txn_state, 1000)
-```
-
-```{ojs}
-c_game_state = {
-       let game_id = await contract.player_to_game_id(wallet.selectedAddress); 
-       let game_state = await contract.game_id_to_game(game_id.game_idx)
-       return [game_id.game_idx, game_state]
-    
-
-}
 ```
 
 ```{ojs}
 c_game_state
 ```
+```{ojs}
+role
+```
+
+```{ojs}
+txn_state
+
+```
+
+```{ojs}
+ txn_status = null // pollTxn(txn_state, 1000)
+```
+
+```{ojs}
+c_game_state = {
+     if (contract) {
+       let game_id = await contract.player_to_game_id(wallet.selectedAddress); 
+       let game_state = await contract.game_id_to_game(game_id.game_idx)
+       return [game_id.game_idx, game_state.game]
+    }
+
+}
+```
+
+
+
+
 
 
 
 ```{ojs}
-wallet.selectedAddress
+role = {
+
+    let hex_address_o = starknetjs.number.toHex(c_game_state[1].player_o).toString().slice(2);
+    let hex_address_x = starknetjs.number.toHex(c_game_state[1].player_x).toString().slice(2);
+    let formatted_addr = wallet.selectedAddress.slice(3);
+    console.log(hex_address_x, hex_address_o, formatted_addr);
+    if (hex_address_o == formatted_addr) {
+        return "O";
+        
+    } 
+    
+    if (hex_address_x == formatted_addr) {
+        return "X";
+    }
+    
+    return "NONE";
+
+}
 ```
 
 ```{ojs}

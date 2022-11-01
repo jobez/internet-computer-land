@@ -4,7 +4,7 @@
     "href": "posts/1_tictactoe/index.html",
     "title": "bitwise tictactoe",
     "section": "",
-    "text": "contract = {\nvar abi = await FileAttachment(\"tictactoe_abi.json\").json()\nreturn wallet ? (new starknetjs.Contract(abi, \"0x02386219c8ca466b820f56426c444b8eb157156d49795eaaeb37f9dbdf589430\",\nwallet.account)) : null\n\n}"
+    "text": "contract = {\nvar abi = await FileAttachment(\"tictactoe_abi.json\").json()\nreturn wallet ? (new starknetjs.Contract(abi, \"0x02d73095244b035d7eae13918444cf9938ad7cf0c1a985e13d927ca670c2b111\",\nwallet.account)) : null\n\n}"
   },
   {
     "objectID": "posts/1_tictactoe/index.html#tic-tac-toe",

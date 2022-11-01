@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code hidden" id="cb1" data-startfrom="6" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 5;"><span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>contract <span class="op">=</span> {</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> abi <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"tictactoe_abi.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> wallet <span class="op">?</span> (<span class="kw">new</span> starknetjs<span class="op">.</span><span class="fu">Contract</span>(abi<span class="op">,</span> <span class="st">"0x02386219c8ca466b820f56426c444b8eb157156d49795eaaeb37f9dbdf589430"</span><span class="op">,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> wallet <span class="op">?</span> (<span class="kw">new</span> starknetjs<span class="op">.</span><span class="fu">Contract</span>(abi<span class="op">,</span> <span class="st">"0x02d73095244b035d7eae13918444cf9938ad7cf0c1a985e13d927ca670c2b111"</span><span class="op">,</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>wallet<span class="op">.</span><span class="at">account</span>)) <span class="op">:</span> <span class="kw">null</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -191,7 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>viewof wallet <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">button</span>(<span class="st">"Connect"</span><span class="op">,</span> {<span class="dt">value</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">reduce</span><span class="op">:</span> connectWallet})</span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>viewof game_id <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">0</span><span class="op">,</span> <span class="dv">255</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Game Id"</span>})</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>viewof game_id <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">1</span><span class="op">,</span> <span class="dv">255</span>]<span class="op">,</span> {<span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Game Id"</span>})</span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">createGame</span>(v) {</span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> txn <span class="op">=</span> <span class="cf">await</span> contract<span class="op">.</span><span class="fu">init_new_game</span>()</span>
@@ -279,7 +279,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" data-startfrom="63" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 62;"><span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>txn_state</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4" data-startfrom="63" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 62;"><span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>wallet<span class="op">.</span><span class="at">selectedAddress</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-4" data-nodetype="expression">
 
@@ -287,29 +287,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5" data-startfrom="68" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 67;"><span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>txn_status <span class="op">=</span> <span class="fu">pollTxn</span>(txn_state<span class="op">,</span> <span class="dv">1000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5" data-startfrom="68" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 67;"><span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>c_game_state</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-5" data-nodetype="declaration">
+<div id="ojs-cell-5" data-nodetype="expression">
 
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6" data-startfrom="72" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 71;"><span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>c_game_state <span class="op">=</span> {</span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>       <span class="kw">let</span> game_id <span class="op">=</span> <span class="cf">await</span> contract<span class="op">.</span><span class="fu">player_to_game_id</span>(wallet<span class="op">.</span><span class="at">selectedAddress</span>)<span class="op">;</span> </span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>       <span class="kw">let</span> game_state <span class="op">=</span> <span class="cf">await</span> contract<span class="op">.</span><span class="fu">game_id_to_game</span>(game_id<span class="op">.</span><span class="at">game_idx</span>)</span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>       <span class="cf">return</span> [game_id<span class="op">.</span><span class="at">game_idx</span><span class="op">,</span> game_state]</span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6" data-startfrom="71" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 70;"><span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>role</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-6" data-nodetype="declaration">
+<div id="ojs-cell-6" data-nodetype="expression">
 
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7" data-startfrom="82" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 81;"><span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>c_game_state</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7" data-startfrom="75" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 74;"><span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>txn_state</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-7" data-nodetype="expression">
 
@@ -317,25 +311,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" data-startfrom="88" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 87;"><span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>wallet<span class="op">.</span><span class="at">selectedAddress</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8" data-startfrom="80" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 79;"><span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>txn_status <span class="op">=</span> <span class="kw">null</span> <span class="co">// pollTxn(txn_state, 1000)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-8" data-nodetype="expression">
+<div id="ojs-cell-8" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" data-startfrom="92" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 91;"><span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a>contract</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9" data-startfrom="84" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 83;"><span id="cb9-84"><a href="#cb9-84" aria-hidden="true" tabindex="-1"></a>c_game_state <span class="op">=</span> {</span>
+<span id="cb9-85"><a href="#cb9-85" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span> (contract) {</span>
+<span id="cb9-86"><a href="#cb9-86" aria-hidden="true" tabindex="-1"></a>       <span class="kw">let</span> game_id <span class="op">=</span> <span class="cf">await</span> contract<span class="op">.</span><span class="fu">player_to_game_id</span>(wallet<span class="op">.</span><span class="at">selectedAddress</span>)<span class="op">;</span> </span>
+<span id="cb9-87"><a href="#cb9-87" aria-hidden="true" tabindex="-1"></a>       <span class="kw">let</span> game_state <span class="op">=</span> <span class="cf">await</span> contract<span class="op">.</span><span class="fu">game_id_to_game</span>(game_id<span class="op">.</span><span class="at">game_idx</span>)</span>
+<span id="cb9-88"><a href="#cb9-88" aria-hidden="true" tabindex="-1"></a>       <span class="cf">return</span> [game_id<span class="op">.</span><span class="at">game_idx</span><span class="op">,</span> game_state<span class="op">.</span><span class="at">game</span>]</span>
+<span id="cb9-89"><a href="#cb9-89" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-90"><a href="#cb9-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-9" data-nodetype="expression">
+<div id="ojs-cell-9" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10" data-startfrom="96" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 95;"><span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a>wallet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10" data-startfrom="101" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 100;"><span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>role <span class="op">=</span> {</span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> hex_address_o <span class="op">=</span> starknetjs<span class="op">.</span><span class="at">number</span><span class="op">.</span><span class="fu">toHex</span>(c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">player_o</span>)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">slice</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> hex_address_x <span class="op">=</span> starknetjs<span class="op">.</span><span class="at">number</span><span class="op">.</span><span class="fu">toHex</span>(c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">player_x</span>)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">slice</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> formatted_addr <span class="op">=</span> wallet<span class="op">.</span><span class="at">selectedAddress</span><span class="op">.</span><span class="fu">slice</span>(<span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(hex_address_x<span class="op">,</span> hex_address_o<span class="op">,</span> formatted_addr)<span class="op">;</span></span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (hex_address_o <span class="op">==</span> formatted_addr) {</span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"O"</span><span class="op">;</span></span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a>    } </span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (hex_address_x <span class="op">==</span> formatted_addr) {</span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"X"</span><span class="op">;</span></span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">"NONE"</span><span class="op">;</span></span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-10" data-nodetype="expression">
+<div id="ojs-cell-10" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" data-startfrom="122" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 121;"><span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a>contract</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-11" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12" data-startfrom="126" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 125;"><span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a>wallet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-12" data-nodetype="expression">
 
 </div>
 </div>
@@ -361,24 +395,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     completed: felt,
 }</code></pre>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12" data-startfrom="124" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 123;"><span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span><span class="op">*</span> <span class="fu">pollTxn</span>(tx<span class="op">,</span> timeout) {</span>
-<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a> <span class="cf">while</span>(<span class="kw">true</span>) {</span>
-<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> last_response <span class="op">=</span> <span class="st">''</span><span class="op">;</span> </span>
-<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> receipt <span class="op">=</span> <span class="cf">await</span> wallet<span class="op">.</span><span class="at">provider</span><span class="op">.</span><span class="fu">getTransactionReceipt</span>(tx<span class="op">.</span><span class="at">transaction_hash</span>)</span>
-<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'REJECTED'</span> <span class="op">||</span> receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'ACCEPTED_ON_L2'</span>) {</span>
-<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> receipt<span class="op">;</span></span>
-<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> Promises<span class="op">.</span><span class="fu">delay</span>(timeout)<span class="op">;</span></span>
-<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (last_response <span class="op">!=</span> receipt<span class="op">.</span><span class="at">status</span>) {</span>
-<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> receipt<span class="op">;</span></span>
-<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a>    last_response <span class="op">=</span> receipt<span class="op">.</span><span class="at">status</span><span class="op">;</span></span>
-<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14" data-startfrom="154" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 153;"><span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span><span class="op">*</span> <span class="fu">pollTxn</span>(tx<span class="op">,</span> timeout) {</span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a> <span class="cf">while</span>(<span class="kw">true</span>) {</span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> last_response <span class="op">=</span> <span class="st">''</span><span class="op">;</span> </span>
+<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> receipt <span class="op">=</span> <span class="cf">await</span> wallet<span class="op">.</span><span class="at">provider</span><span class="op">.</span><span class="fu">getTransactionReceipt</span>(tx<span class="op">.</span><span class="at">transaction_hash</span>)</span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'REJECTED'</span> <span class="op">||</span> receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'ACCEPTED_ON_L2'</span>) {</span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> receipt<span class="op">;</span></span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> Promises<span class="op">.</span><span class="fu">delay</span>(timeout)<span class="op">;</span></span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (last_response <span class="op">!=</span> receipt<span class="op">.</span><span class="at">status</span>) {</span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> receipt<span class="op">;</span></span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a>    last_response <span class="op">=</span> receipt<span class="op">.</span><span class="at">status</span><span class="op">;</span></span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-11" data-nodetype="declaration">
+<div id="ojs-cell-13" data-nodetype="declaration">
 
 </div>
 </div>
@@ -387,74 +421,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="coordinating-game-session">coordinating game session</h3>
 <p>A game needs two players. Since the game is going to be played ‘across’ a contract, we need to allow one player to create and invite another player to a game.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13" data-startfrom="149" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 148;"><span id="cb13-149"><a href="#cb13-149" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span><span class="op">*</span> <span class="fu">renderGame</span>() {</span>
-<span id="cb13-150"><a href="#cb13-150" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> state <span class="op">=</span> <span class="fu">createState</span>()<span class="op">;</span></span>
-<span id="cb13-151"><a href="#cb13-151" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="kw">true</span>) {</span>
-<span id="cb13-152"><a href="#cb13-152" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> body <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb13-153"><a href="#cb13-153" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> p <span class="op">=</span> <span class="kw">new</span> <span class="bu">Promise</span>((resolve) <span class="kw">=&gt;</span> {</span>
-<span id="cb13-154"><a href="#cb13-154" aria-hidden="true" tabindex="-1"></a>      body <span class="op">=</span> <span class="fu">renderGrid</span>(state<span class="op">,</span> resolve)<span class="op">;</span></span>
-<span id="cb13-155"><a href="#cb13-155" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
-<span id="cb13-156"><a href="#cb13-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-157"><a href="#cb13-157" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> body<span class="op">;</span></span>
-<span id="cb13-158"><a href="#cb13-158" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> p<span class="op">;</span></span>
-<span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb13-160"><a href="#cb13-160" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div id="ojs-cell-12" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14" data-startfrom="164" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 163;"><span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">renderBox</span>(cellValue<span class="op">,</span> onClick) {</span>
-<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a>  <span class="co">//const charLut = [``, X_PLAYER, O_PLAYER];</span></span>
-<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a>  <span class="co">// const charLut = ['', 'X', 'O']; </span></span>
-<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> box <span class="op">=</span> <span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div</span></span>
-<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a><span class="vs">      style="</span></span>
-<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a><span class="vs">        display: flex;</span></span>
-<span id="cb14-171"><a href="#cb14-171" aria-hidden="true" tabindex="-1"></a><span class="vs">        align-items: center;</span></span>
-<span id="cb14-172"><a href="#cb14-172" aria-hidden="true" tabindex="-1"></a><span class="vs">        justify-content: center;</span></span>
-<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a><span class="vs">        width: 100px;</span></span>
-<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a><span class="vs">        height: 100px;</span></span>
-<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a><span class="vs">        border: 2px black solid;</span></span>
-<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a><span class="vs">        user-select: none;</span></span>
-<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a><span class="vs">      "&gt;</span></span>
-<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a><span class="vs">     &lt;div style="font-size: 5em"&gt;</span><span class="sc">${</span>charLut[cellValue]<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a>  box<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"click"</span><span class="op">,</span> onClick)<span class="op">;</span></span>
-<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a>  <span class="co">//render box cares not about what the clicking does</span></span>
-<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> box<span class="op">;</span></span>
-<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div id="ojs-cell-13" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15" data-startfrom="188" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 187;"><span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a>renderGrid <span class="op">=</span> (state<span class="op">,</span> onChange) <span class="kw">=&gt;</span></span>
-<span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb15-190"><a href="#cb15-190" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div style="display:flex; flex-direction: column; justify-content: center; align-items: center;"&gt;</span></span>
-<span id="cb15-191"><a href="#cb15-191" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h1 style="font-size: 5em;color: red"&gt;Tic-Tac-Toe&lt;/h1&gt;</span></span>
-<span id="cb15-192"><a href="#cb15-192" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h2&gt; Winner is </span><span class="sc">${</span>charLut[state<span class="op">.</span><span class="at">winner</span>]<span class="sc">}</span><span class="vs">&lt;/h2&gt; </span></span>
-<span id="cb15-193"><a href="#cb15-193" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div style="</span></span>
-<span id="cb15-194"><a href="#cb15-194" aria-hidden="true" tabindex="-1"></a><span class="vs">      display:inline-flex;</span></span>
-<span id="cb15-195"><a href="#cb15-195" aria-hidden="true" tabindex="-1"></a><span class="vs">      justify-content: center;</span></span>
-<span id="cb15-196"><a href="#cb15-196" aria-hidden="true" tabindex="-1"></a><span class="vs">      align-items: center;</span></span>
-<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a><span class="vs">      border: 2px solid black;</span></span>
-<span id="cb15-198"><a href="#cb15-198" aria-hidden="true" tabindex="-1"></a><span class="vs">    "&gt;</span><span class="sc">${</span>d3<span class="op">.</span><span class="fu">range</span>(GRID_WIDTH)<span class="op">.</span><span class="fu">map</span>((row) <span class="kw">=&gt;</span> {</span>
-<span id="cb15-199"><a href="#cb15-199" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div&gt;</span><span class="sc">${</span>d3<span class="op">.</span><span class="fu">range</span>(GRID_HEIGHT)<span class="op">.</span><span class="fu">map</span>((col) <span class="kw">=&gt;</span></span>
-<span id="cb15-200"><a href="#cb15-200" aria-hidden="true" tabindex="-1"></a>        <span class="fu">renderBox</span>(state<span class="op">.</span><span class="at">board</span>[col][row]<span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb15-201"><a href="#cb15-201" aria-hidden="true" tabindex="-1"></a>          <span class="fu">handleTurn</span>(state<span class="op">,</span> col<span class="op">,</span> row)<span class="op">;</span> <span class="co">//state[col][row] = (state[col][row] + 1) % 3;</span></span>
-<span id="cb15-202"><a href="#cb15-202" aria-hidden="true" tabindex="-1"></a>          <span class="fu">onChange</span>()<span class="op">;</span></span>
-<span id="cb15-203"><a href="#cb15-203" aria-hidden="true" tabindex="-1"></a>          <span class="co">//}</span></span>
-<span id="cb15-204"><a href="#cb15-204" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb15-205"><a href="#cb15-205" aria-hidden="true" tabindex="-1"></a>      )<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
-<span id="cb15-206"><a href="#cb15-206" aria-hidden="true" tabindex="-1"></a>    })<span class="sc">}</span></span>
-<span id="cb15-207"><a href="#cb15-207" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
-<span id="cb15-208"><a href="#cb15-208" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15" data-startfrom="179" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 178;"><span id="cb15-179"><a href="#cb15-179" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span><span class="op">*</span> <span class="fu">renderGame</span>() {</span>
+<span id="cb15-180"><a href="#cb15-180" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> state <span class="op">=</span> <span class="fu">createState</span>()<span class="op">;</span></span>
+<span id="cb15-181"><a href="#cb15-181" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="kw">true</span>) {</span>
+<span id="cb15-182"><a href="#cb15-182" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> body <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> p <span class="op">=</span> <span class="kw">new</span> <span class="bu">Promise</span>((resolve) <span class="kw">=&gt;</span> {</span>
+<span id="cb15-184"><a href="#cb15-184" aria-hidden="true" tabindex="-1"></a>      body <span class="op">=</span> <span class="fu">renderGrid</span>(state<span class="op">,</span> resolve)<span class="op">;</span></span>
+<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb15-186"><a href="#cb15-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-187"><a href="#cb15-187" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> body<span class="op">;</span></span>
+<span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> p<span class="op">;</span></span>
+<span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-190"><a href="#cb15-190" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-14" data-nodetype="declaration">
 
@@ -462,24 +440,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16" data-startfrom="214" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 213;"><span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">cr_to_binary</span>(col<span class="op">,</span> row) {</span>
-<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> increase<span class="op">;</span></span>
-<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span> (col) {</span>
-<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">0</span><span class="op">:</span> </span>
-<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span></span>
-<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
-<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">2</span><span class="op">:</span></span>
-<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> binary_idx <span class="op">=</span> row <span class="op">+</span> increase<span class="op">;</span></span>
-<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>(<span class="dv">2</span><span class="op">,</span> binary_idx)<span class="op">;</span></span>
-<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16" data-startfrom="194" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 193;"><span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">renderBox</span>(cellValue<span class="op">,</span> onClick) {</span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a>  <span class="co">//const charLut = [``, X_PLAYER, O_PLAYER];</span></span>
+<span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a>  <span class="co">// const charLut = ['', 'X', 'O']; </span></span>
+<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> box <span class="op">=</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div</span></span>
+<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a><span class="vs">      style="</span></span>
+<span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a><span class="vs">        display: flex;</span></span>
+<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a><span class="vs">        align-items: center;</span></span>
+<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a><span class="vs">        justify-content: center;</span></span>
+<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a><span class="vs">        width: 100px;</span></span>
+<span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a><span class="vs">        height: 100px;</span></span>
+<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a><span class="vs">        border: 2px black solid;</span></span>
+<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a><span class="vs">        user-select: none;</span></span>
+<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a><span class="vs">      "&gt;</span></span>
+<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a><span class="vs">     &lt;div style="font-size: 5em"&gt;</span><span class="sc">${</span>charLut[cellValue]<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a>  box<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"click"</span><span class="op">,</span> onClick)<span class="op">;</span></span>
+<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a>  <span class="co">//render box cares not about what the clicking does</span></span>
+<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> box<span class="op">;</span></span>
+<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-15" data-nodetype="declaration">
 
@@ -487,30 +468,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17" data-startfrom="235" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 234;"><span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">handleTurn</span>(state<span class="op">,</span> col<span class="op">,</span> row) {</span>
-<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">===</span> <span class="dv">0</span>) {</span>
-<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (state<span class="op">.</span><span class="at">turn</span> <span class="op">%</span> <span class="dv">2</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
-<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">=</span> X_PLAYER<span class="op">;</span></span>
-<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">my_potential_move</span> <span class="op">=</span> [ <span class="fu">cr_to_binary</span>(col<span class="op">,</span> row)  <span class="op">,</span> [col<span class="op">,</span> row] ]</span>
-<span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">=</span> O_PLAYER<span class="op">;</span></span>
-<span id="cb17-243"><a href="#cb17-243" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">my_potential_move</span> <span class="op">=</span> [ <span class="fu">cr_to_binary</span>(col<span class="op">,</span> row)  <span class="op">,</span> [col<span class="op">,</span> row] ]</span>
-<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">turn</span><span class="op">++;</span></span>
-<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a>    <span class="co">// winGame(state);</span></span>
-<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(state<span class="op">,</span> col<span class="op">,</span> row)<span class="op">;</span></span>
-<span id="cb17-248"><a href="#cb17-248" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb17-249"><a href="#cb17-249" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> bival <span class="op">=</span> state<span class="op">.</span><span class="at">my_potential_move</span>[<span class="dv">0</span>]<span class="op">;</span></span>
-<span id="cb17-250"><a href="#cb17-250" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> [p_c<span class="op">,</span> p_r] <span class="op">=</span> state<span class="op">.</span><span class="at">my_potential_move</span>[<span class="dv">1</span>]</span>
-<span id="cb17-251"><a href="#cb17-251" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (p_c <span class="op">==</span> col <span class="op">&amp;&amp;</span> p_r <span class="op">==</span> row) {</span>
-<span id="cb17-252"><a href="#cb17-252" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">my_potential_move</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb17-253"><a href="#cb17-253" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb17-254"><a href="#cb17-254" aria-hidden="true" tabindex="-1"></a>     </span>
-<span id="cb17-255"><a href="#cb17-255" aria-hidden="true" tabindex="-1"></a>     }</span>
-<span id="cb17-256"><a href="#cb17-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-257"><a href="#cb17-257" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb17-258"><a href="#cb17-258" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17" data-startfrom="218" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 217;"><span id="cb17-218"><a href="#cb17-218" aria-hidden="true" tabindex="-1"></a>renderGrid <span class="op">=</span> (state<span class="op">,</span> onChange) <span class="kw">=&gt;</span></span>
+<span id="cb17-219"><a href="#cb17-219" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb17-220"><a href="#cb17-220" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div style="display:flex; flex-direction: column; justify-content: center; align-items: center;"&gt;</span></span>
+<span id="cb17-221"><a href="#cb17-221" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h1 style="font-size: 5em;color: red"&gt;Tic-Tac-Toe&lt;/h1&gt;</span></span>
+<span id="cb17-222"><a href="#cb17-222" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h2&gt; Winner is </span><span class="sc">${</span>charLut[state<span class="op">.</span><span class="at">winner</span>]<span class="sc">}</span><span class="vs">&lt;/h2&gt; </span></span>
+<span id="cb17-223"><a href="#cb17-223" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div style="</span></span>
+<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a><span class="vs">      display:inline-flex;</span></span>
+<span id="cb17-225"><a href="#cb17-225" aria-hidden="true" tabindex="-1"></a><span class="vs">      justify-content: center;</span></span>
+<span id="cb17-226"><a href="#cb17-226" aria-hidden="true" tabindex="-1"></a><span class="vs">      align-items: center;</span></span>
+<span id="cb17-227"><a href="#cb17-227" aria-hidden="true" tabindex="-1"></a><span class="vs">      border: 2px solid black;</span></span>
+<span id="cb17-228"><a href="#cb17-228" aria-hidden="true" tabindex="-1"></a><span class="vs">    "&gt;</span><span class="sc">${</span>d3<span class="op">.</span><span class="fu">range</span>(GRID_WIDTH)<span class="op">.</span><span class="fu">map</span>((row) <span class="kw">=&gt;</span> {</span>
+<span id="cb17-229"><a href="#cb17-229" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div&gt;</span><span class="sc">${</span>d3<span class="op">.</span><span class="fu">range</span>(GRID_HEIGHT)<span class="op">.</span><span class="fu">map</span>((col) <span class="kw">=&gt;</span></span>
+<span id="cb17-230"><a href="#cb17-230" aria-hidden="true" tabindex="-1"></a>        <span class="fu">renderBox</span>(state<span class="op">.</span><span class="at">board</span>[col][row]<span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb17-231"><a href="#cb17-231" aria-hidden="true" tabindex="-1"></a>          <span class="fu">handleTurn</span>(state<span class="op">,</span> col<span class="op">,</span> row)<span class="op">;</span> <span class="co">//state[col][row] = (state[col][row] + 1) % 3;</span></span>
+<span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a>          <span class="fu">onChange</span>()<span class="op">;</span></span>
+<span id="cb17-233"><a href="#cb17-233" aria-hidden="true" tabindex="-1"></a>          <span class="co">//}</span></span>
+<span id="cb17-234"><a href="#cb17-234" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a>      )<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a>    })<span class="sc">}</span></span>
+<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-16" data-nodetype="declaration">
 
@@ -518,7 +496,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18" data-startfrom="263" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 262;"><span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a>charLut <span class="op">=</span> [<span class="st">""</span><span class="op">,</span> <span class="st">"X"</span><span class="op">,</span> <span class="st">"O"</span><span class="op">,</span> <span class="st">"neither"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18" data-startfrom="244" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 243;"><span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">cr_to_binary</span>(col<span class="op">,</span> row) {</span>
+<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> increase<span class="op">;</span></span>
+<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span> (col) {</span>
+<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">0</span><span class="op">:</span> </span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span></span>
+<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">2</span><span class="op">:</span></span>
+<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
+<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> binary_idx <span class="op">=</span> row <span class="op">+</span> increase<span class="op">;</span></span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>(<span class="dv">2</span><span class="op">,</span> binary_idx)<span class="op">;</span></span>
+<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-17" data-nodetype="declaration">
 
@@ -526,13 +521,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19" data-startfrom="267" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 266;"><span id="cb19-267"><a href="#cb19-267" aria-hidden="true" tabindex="-1"></a>createState <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb19-268"><a href="#cb19-268" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> board <span class="op">=</span> d3</span>
-<span id="cb19-269"><a href="#cb19-269" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">range</span>(GRID_HEIGHT)</span>
-<span id="cb19-270"><a href="#cb19-270" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">map</span>(() <span class="kw">=&gt;</span> d3<span class="op">.</span><span class="fu">range</span>(GRID_WIDTH)<span class="op">.</span><span class="fu">map</span>(() <span class="kw">=&gt;</span> <span class="dv">0</span>))<span class="op">;</span></span>
-<span id="cb19-271"><a href="#cb19-271" aria-hidden="true" tabindex="-1"></a>  <span class="co">//state[2][2] = 1;</span></span>
-<span id="cb19-272"><a href="#cb19-272" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { board<span class="op">,</span> <span class="dt">turn</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">winner</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">x_player_state</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">o_player_state</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">my_potential_move</span><span class="op">:</span> <span class="kw">null</span> }<span class="op">;</span></span>
-<span id="cb19-273"><a href="#cb19-273" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19" data-startfrom="265" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 264;"><span id="cb19-265"><a href="#cb19-265" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">handleTurn</span>(state<span class="op">,</span> col<span class="op">,</span> row) {</span>
+<span id="cb19-266"><a href="#cb19-266" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb19-267"><a href="#cb19-267" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (state<span class="op">.</span><span class="at">turn</span> <span class="op">%</span> <span class="dv">2</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb19-268"><a href="#cb19-268" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">=</span> X_PLAYER<span class="op">;</span></span>
+<span id="cb19-269"><a href="#cb19-269" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">my_potential_move</span> <span class="op">=</span> [ <span class="fu">cr_to_binary</span>(col<span class="op">,</span> row)  <span class="op">,</span> [col<span class="op">,</span> row] ]</span>
+<span id="cb19-270"><a href="#cb19-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-271"><a href="#cb19-271" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb19-272"><a href="#cb19-272" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">=</span> O_PLAYER<span class="op">;</span></span>
+<span id="cb19-273"><a href="#cb19-273" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">my_potential_move</span> <span class="op">=</span> [ <span class="fu">cr_to_binary</span>(col<span class="op">,</span> row)  <span class="op">,</span> [col<span class="op">,</span> row] ]</span>
+<span id="cb19-274"><a href="#cb19-274" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb19-275"><a href="#cb19-275" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">turn</span><span class="op">++;</span></span>
+<span id="cb19-276"><a href="#cb19-276" aria-hidden="true" tabindex="-1"></a>    <span class="co">// winGame(state);</span></span>
+<span id="cb19-277"><a href="#cb19-277" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(state<span class="op">,</span> col<span class="op">,</span> row)<span class="op">;</span></span>
+<span id="cb19-278"><a href="#cb19-278" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb19-279"><a href="#cb19-279" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> bival <span class="op">=</span> state<span class="op">.</span><span class="at">my_potential_move</span>[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb19-280"><a href="#cb19-280" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> [p_c<span class="op">,</span> p_r] <span class="op">=</span> state<span class="op">.</span><span class="at">my_potential_move</span>[<span class="dv">1</span>]</span>
+<span id="cb19-281"><a href="#cb19-281" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (p_c <span class="op">==</span> col <span class="op">&amp;&amp;</span> p_r <span class="op">==</span> row) {</span>
+<span id="cb19-282"><a href="#cb19-282" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">my_potential_move</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb19-283"><a href="#cb19-283" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb19-284"><a href="#cb19-284" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb19-285"><a href="#cb19-285" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb19-286"><a href="#cb19-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-287"><a href="#cb19-287" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb19-288"><a href="#cb19-288" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-18" data-nodetype="declaration">
 
@@ -540,58 +552,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb20" data-startfrom="279" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 278;"><span id="cb20-279"><a href="#cb20-279" aria-hidden="true" tabindex="-1"></a>GRID_WIDTH <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb20-280"><a href="#cb20-280" aria-hidden="true" tabindex="-1"></a>GRID_HEIGHT <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb20-281"><a href="#cb20-281" aria-hidden="true" tabindex="-1"></a>X_PLAYER <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb20-282"><a href="#cb20-282" aria-hidden="true" tabindex="-1"></a>X_PLAYER_STATE <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb20-283"><a href="#cb20-283" aria-hidden="true" tabindex="-1"></a>O_PLAYER <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb20-284"><a href="#cb20-284" aria-hidden="true" tabindex="-1"></a>O_PLAYER_STATE <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb20-285"><a href="#cb20-285" aria-hidden="true" tabindex="-1"></a>NEITHER <span class="op">=</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20" data-startfrom="293" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 292;"><span id="cb20-293"><a href="#cb20-293" aria-hidden="true" tabindex="-1"></a>charLut <span class="op">=</span> [<span class="st">""</span><span class="op">,</span> <span class="st">"X"</span><span class="op">,</span> <span class="st">"O"</span><span class="op">,</span> <span class="st">"neither"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-19" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21" data-startfrom="297" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 296;"><span id="cb21-297"><a href="#cb21-297" aria-hidden="true" tabindex="-1"></a>createState <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb21-298"><a href="#cb21-298" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> board <span class="op">=</span> d3</span>
+<span id="cb21-299"><a href="#cb21-299" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">range</span>(GRID_HEIGHT)</span>
+<span id="cb21-300"><a href="#cb21-300" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">map</span>(() <span class="kw">=&gt;</span> d3<span class="op">.</span><span class="fu">range</span>(GRID_WIDTH)<span class="op">.</span><span class="fu">map</span>(() <span class="kw">=&gt;</span> <span class="dv">0</span>))<span class="op">;</span></span>
+<span id="cb21-301"><a href="#cb21-301" aria-hidden="true" tabindex="-1"></a>  <span class="co">//state[2][2] = 1;</span></span>
+<span id="cb21-302"><a href="#cb21-302" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { board<span class="op">,</span> <span class="dt">turn</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">winner</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">x_player_state</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">o_player_state</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">my_potential_move</span><span class="op">:</span> <span class="kw">null</span> }<span class="op">;</span></span>
+<span id="cb21-303"><a href="#cb21-303" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-20" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb22" data-startfrom="309" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 308;"><span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a>GRID_WIDTH <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a>GRID_HEIGHT <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb22-311"><a href="#cb22-311" aria-hidden="true" tabindex="-1"></a>X_PLAYER <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb22-312"><a href="#cb22-312" aria-hidden="true" tabindex="-1"></a>X_PLAYER_STATE <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb22-313"><a href="#cb22-313" aria-hidden="true" tabindex="-1"></a>O_PLAYER <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb22-314"><a href="#cb22-314" aria-hidden="true" tabindex="-1"></a>O_PLAYER_STATE <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb22-315"><a href="#cb22-315" aria-hidden="true" tabindex="-1"></a>NEITHER <span class="op">=</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-19-1" data-nodetype="declaration">
+<div id="ojs-cell-21-1" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-19-2" data-nodetype="declaration">
+<div id="ojs-cell-21-2" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-19-3" data-nodetype="declaration">
+<div id="ojs-cell-21-3" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-19-4" data-nodetype="declaration">
+<div id="ojs-cell-21-4" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-19-5" data-nodetype="declaration">
+<div id="ojs-cell-21-5" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-19-6" data-nodetype="declaration">
+<div id="ojs-cell-21-6" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-19-7" data-nodetype="declaration">
+<div id="ojs-cell-21-7" data-nodetype="declaration">
 
 </div>
 </div>
@@ -604,7 +638,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"contract = {\nvar abi = await FileAttachment(\"tictactoe_abi.json\").json()\nreturn wallet ? (new starknetjs.Contract(abi, \"0x02386219c8ca466b820f56426c444b8eb157156d49795eaaeb37f9dbdf589430\",\nwallet.account)) : null\n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"\nimport { connectWallet, starknetjs  } from \"/posts/0_hello_wallet/index.qmd\";\nd3 = require(\"d3@6\");\n\nviewof wallet = Inputs.button(\"Connect\", {value: null, reduce: connectWallet})\n\nviewof game_id = Inputs.range([0, 255], {step: 1, label: \"Game Id\"})\n\nasync function createGame(v) {\n    var txn = await contract.init_new_game()\n    console.log(txn);\n    return txn;\n\n}\n\nasync function joinGame(v) {\n    console.log(game_id);\n    var txn = await contract.join_game(game_id)\n    console.log(txn);\n    return txn;\n\n}\n\nviewof txn_state = Inputs.button([\n  [\"Create\", createGame],\n  [\"Join\", joinGame],\n  [\"Submit move\", value => console.log(\"submit\")]  \n\n], {value: null, label: \"Game\"})\n\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"__card = renderGame()\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"txn_state\n\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"txn_status = pollTxn(txn_state, 1000)\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"c_game_state = {\n       let game_id = await contract.player_to_game_id(wallet.selectedAddress); \n       let game_state = await contract.game_id_to_game(game_id.game_idx)\n       return [game_id.game_idx, game_state]\n    \n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"c_game_state\n"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"wallet.selectedAddress\n"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"contract\n"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"wallet\n"},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"async function* pollTxn(tx, timeout) {\n while(true) {\n  var last_response = ''; \n  let receipt = await wallet.provider.getTransactionReceipt(tx.transaction_hash)\n  if (receipt.status == 'REJECTED' || receipt.status == 'ACCEPTED_ON_L2') {\n    return receipt;\n  } else {\n    await Promises.delay(timeout);\n    if (last_response != receipt.status) {\n    yield receipt;\n    }\n    last_response = receipt.status;\n   \n  }\n  }\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-12","inline":false,"source":"async function* renderGame() {\n  const state = createState();\n  while (true) {\n    let body = null;\n    const p = new Promise((resolve) => {\n      body = renderGrid(state, resolve);\n    });\n\n    yield body;\n    await p;\n  }\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-13","inline":false,"source":"function renderBox(cellValue, onClick) {\n  //const charLut = [``, X_PLAYER, O_PLAYER];\n  // const charLut = ['', 'X', 'O']; \n  const box = html`\n    <div\n      style=\"\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        width: 100px;\n        height: 100px;\n        border: 2px black solid;\n        user-select: none;\n      \">\n     <div style=\"font-size: 5em\">${charLut[cellValue]}</div>\n  </div>`;\n\n  box.addEventListener(\"click\", onClick);\n  //render box cares not about what the clicking does\n  return box;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-14","inline":false,"source":"\nrenderGrid = (state, onChange) =>\n  html`\n  <div style=\"display:flex; flex-direction: column; justify-content: center; align-items: center;\">\n    <h1 style=\"font-size: 5em;color: red\">Tic-Tac-Toe</h1>\n    <h2> Winner is ${charLut[state.winner]}</h2> \n    <div style=\"\n      display:inline-flex;\n      justify-content: center;\n      align-items: center;\n      border: 2px solid black;\n    \">${d3.range(GRID_WIDTH).map((row) => {\n      return html`<div>${d3.range(GRID_HEIGHT).map((col) =>\n        renderBox(state.board[col][row], () => {\n          handleTurn(state, col, row); //state[col][row] = (state[col][row] + 1) % 3;\n          onChange();\n          //}\n        })\n      )}`;\n    })}\n    </div>\n  </div>`\n\n"},{"methodName":"interpret","cellName":"ojs-cell-15","inline":false,"source":"function cr_to_binary(col, row) {\n    var increase;\n    switch (col) {\n        case 0: \n            increase = 0;\n            break;\n        case 1:\n            increase = 3;\n            break;\n        case 2:\n            increase = 6\n;\n\n    }\n    \n    var binary_idx = row + increase;\n    return Math.pow(2, binary_idx);\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-16","inline":false,"source":"function handleTurn(state, col, row) {\n  if (state.board[col][row] === 0) {\n    if (state.turn % 2 === 0) {\n      state.board[col][row] = X_PLAYER;\n      state.my_potential_move = [ cr_to_binary(col, row)  , [col, row] ]\n\n    } else {\n      state.board[col][row] = O_PLAYER;\n      state.my_potential_move = [ cr_to_binary(col, row)  , [col, row] ]\n    }\n    state.turn++;\n    // winGame(state);\n    console.log(state, col, row);\n  } else {\n    let bival = state.my_potential_move[0];\n    let [p_c, p_r] = state.my_potential_move[1]\n    if (p_c == col && p_r == row) {\n    state.my_potential_move = null;\n    state.board[col][row] = 0;\n     \n     }\n\n  }\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-17","inline":false,"source":"charLut = [\"\", \"X\", \"O\", \"neither\"]\n"},{"methodName":"interpret","cellName":"ojs-cell-18","inline":false,"source":"createState = () => {\n  const board = d3\n    .range(GRID_HEIGHT)\n    .map(() => d3.range(GRID_WIDTH).map(() => 0));\n  //state[2][2] = 1;\n  return { board, turn: 0, winner: 0, x_player_state: 0, o_player_state: 0, my_potential_move: null };\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-19","inline":false,"source":"GRID_WIDTH = 3\nGRID_HEIGHT = 3\nX_PLAYER = 1\nX_PLAYER_STATE = 0\nO_PLAYER = 2\nO_PLAYER_STATE = 0\nNEITHER = 3\n"},{"methodName":"interpretQuiet","source":"shinyInput('wallet')"},{"methodName":"interpretQuiet","source":"shinyInput('game_id')"},{"methodName":"interpretQuiet","source":"shinyInput('txn_state')"}]}
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"contract = {\nvar abi = await FileAttachment(\"tictactoe_abi.json\").json()\nreturn wallet ? (new starknetjs.Contract(abi, \"0x02d73095244b035d7eae13918444cf9938ad7cf0c1a985e13d927ca670c2b111\",\nwallet.account)) : null\n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"\nimport { connectWallet, starknetjs  } from \"/posts/0_hello_wallet/index.qmd\";\nd3 = require(\"d3@6\");\n\nviewof wallet = Inputs.button(\"Connect\", {value: null, reduce: connectWallet})\n\nviewof game_id = Inputs.range([1, 255], {step: 1, label: \"Game Id\"})\n\nasync function createGame(v) {\n    var txn = await contract.init_new_game()\n    console.log(txn);\n    return txn;\n\n}\n\nasync function joinGame(v) {\n    console.log(game_id);\n    var txn = await contract.join_game(game_id)\n    console.log(txn);\n    return txn;\n\n}\n\nviewof txn_state = Inputs.button([\n  [\"Create\", createGame],\n  [\"Join\", joinGame],\n  [\"Submit move\", value => console.log(\"submit\")]  \n\n], {value: null, label: \"Game\"})\n\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"__card = renderGame()\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"wallet.selectedAddress\n\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"c_game_state\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"role\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"txn_state\n\n"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":" txn_status = null // pollTxn(txn_state, 1000)\n"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"c_game_state = {\n     if (contract) {\n       let game_id = await contract.player_to_game_id(wallet.selectedAddress); \n       let game_state = await contract.game_id_to_game(game_id.game_idx)\n       return [game_id.game_idx, game_state.game]\n    }\n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"role = {\n\n    let hex_address_o = starknetjs.number.toHex(c_game_state[1].player_o).toString().slice(2);\n    let hex_address_x = starknetjs.number.toHex(c_game_state[1].player_x).toString().slice(2);\n    let formatted_addr = wallet.selectedAddress.slice(3);\n    console.log(hex_address_x, hex_address_o, formatted_addr);\n    if (hex_address_o == formatted_addr) {\n        return \"O\";\n        \n    } \n    \n    if (hex_address_x == formatted_addr) {\n        return \"X\";\n    }\n    \n    return \"NONE\";\n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"contract\n"},{"methodName":"interpret","cellName":"ojs-cell-12","inline":false,"source":"wallet\n"},{"methodName":"interpret","cellName":"ojs-cell-13","inline":false,"source":"async function* pollTxn(tx, timeout) {\n while(true) {\n  var last_response = ''; \n  let receipt = await wallet.provider.getTransactionReceipt(tx.transaction_hash)\n  if (receipt.status == 'REJECTED' || receipt.status == 'ACCEPTED_ON_L2') {\n    return receipt;\n  } else {\n    await Promises.delay(timeout);\n    if (last_response != receipt.status) {\n    yield receipt;\n    }\n    last_response = receipt.status;\n   \n  }\n  }\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-14","inline":false,"source":"async function* renderGame() {\n  const state = createState();\n  while (true) {\n    let body = null;\n    const p = new Promise((resolve) => {\n      body = renderGrid(state, resolve);\n    });\n\n    yield body;\n    await p;\n  }\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-15","inline":false,"source":"function renderBox(cellValue, onClick) {\n  //const charLut = [``, X_PLAYER, O_PLAYER];\n  // const charLut = ['', 'X', 'O']; \n  const box = html`\n    <div\n      style=\"\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        width: 100px;\n        height: 100px;\n        border: 2px black solid;\n        user-select: none;\n      \">\n     <div style=\"font-size: 5em\">${charLut[cellValue]}</div>\n  </div>`;\n\n  box.addEventListener(\"click\", onClick);\n  //render box cares not about what the clicking does\n  return box;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-16","inline":false,"source":"\nrenderGrid = (state, onChange) =>\n  html`\n  <div style=\"display:flex; flex-direction: column; justify-content: center; align-items: center;\">\n    <h1 style=\"font-size: 5em;color: red\">Tic-Tac-Toe</h1>\n    <h2> Winner is ${charLut[state.winner]}</h2> \n    <div style=\"\n      display:inline-flex;\n      justify-content: center;\n      align-items: center;\n      border: 2px solid black;\n    \">${d3.range(GRID_WIDTH).map((row) => {\n      return html`<div>${d3.range(GRID_HEIGHT).map((col) =>\n        renderBox(state.board[col][row], () => {\n          handleTurn(state, col, row); //state[col][row] = (state[col][row] + 1) % 3;\n          onChange();\n          //}\n        })\n      )}`;\n    })}\n    </div>\n  </div>`\n\n"},{"methodName":"interpret","cellName":"ojs-cell-17","inline":false,"source":"function cr_to_binary(col, row) {\n    var increase;\n    switch (col) {\n        case 0: \n            increase = 0;\n            break;\n        case 1:\n            increase = 3;\n            break;\n        case 2:\n            increase = 6\n;\n\n    }\n    \n    var binary_idx = row + increase;\n    return Math.pow(2, binary_idx);\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-18","inline":false,"source":"function handleTurn(state, col, row) {\n  if (state.board[col][row] === 0) {\n    if (state.turn % 2 === 0) {\n      state.board[col][row] = X_PLAYER;\n      state.my_potential_move = [ cr_to_binary(col, row)  , [col, row] ]\n\n    } else {\n      state.board[col][row] = O_PLAYER;\n      state.my_potential_move = [ cr_to_binary(col, row)  , [col, row] ]\n    }\n    state.turn++;\n    // winGame(state);\n    console.log(state, col, row);\n  } else {\n    let bival = state.my_potential_move[0];\n    let [p_c, p_r] = state.my_potential_move[1]\n    if (p_c == col && p_r == row) {\n    state.my_potential_move = null;\n    state.board[col][row] = 0;\n     \n     }\n\n  }\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-19","inline":false,"source":"charLut = [\"\", \"X\", \"O\", \"neither\"]\n"},{"methodName":"interpret","cellName":"ojs-cell-20","inline":false,"source":"createState = () => {\n  const board = d3\n    .range(GRID_HEIGHT)\n    .map(() => d3.range(GRID_WIDTH).map(() => 0));\n  //state[2][2] = 1;\n  return { board, turn: 0, winner: 0, x_player_state: 0, o_player_state: 0, my_potential_move: null };\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-21","inline":false,"source":"GRID_WIDTH = 3\nGRID_HEIGHT = 3\nX_PLAYER = 1\nX_PLAYER_STATE = 0\nO_PLAYER = 2\nO_PLAYER_STATE = 0\nNEITHER = 3\n"},{"methodName":"interpretQuiet","source":"shinyInput('wallet')"},{"methodName":"interpretQuiet","source":"shinyInput('game_id')"},{"methodName":"interpretQuiet","source":"shinyInput('txn_state')"}]}
 </script>
 <script type="module">
 window._ojs.paths.runtimeToDoc = "../../posts/1_tictactoe";

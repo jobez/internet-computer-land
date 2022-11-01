@@ -62,7 +62,11 @@ return wallet ? (new starknetjs.Contract(abi, "0x036486801b8f42e950824cba55b2df8
 Here we call a view method, basically reading state from the contract. Observable has some magic that lets me treat promises like regular statements, but everything 'across' the contract interaction is asynchronous.
 
 ```{ojs}
-contract ? md`${contract.counter()} is the count` : null
+count = contract.counter()
+```
+
+```{ojs}
+contract ? md`${count} is the count` : null
 ```
 
 Increment counter mutates the contract state. 
@@ -83,6 +87,34 @@ What's going on? What's happening? What is this magic?
 
 ```{ojs}
 incrementTxn
+```
+
+```{ojs}
+async function* pollTxn(tx, timeout) {
+ while(true) {
+  var last_response; 
+  let receipt = await wallet.provider.getTransactionReceipt(tx.transaction_hash)
+  console.log(receipt);
+  if (receipt.status == 'REJECTED' || receipt.status == 'ACCEPTED_ON_L2') {
+    return receipt;
+  } else {
+    last_response = receipt;
+    await Promises.delay(timeout);
+    if (last_response.status != receipt.status) {
+    yield receipt;
+    }
+   ;
+  }
+  }  
+}
+```
+
+```{ojs}
+txnTracker = pollTxn(incrementTxn, 10000);
+```
+
+```{ojs}
+txnTracker
 ```
 
 ```{ojs}

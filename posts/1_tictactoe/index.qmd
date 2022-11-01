@@ -2,34 +2,99 @@
 title: "bitwise tictactoe"
 ---
 
-Do I need to write text?
+```{ojs}
+//| echo: false
+contract = {
+var abi = await FileAttachment("tictactoe_abi.json").json()
+return wallet ? (new starknetjs.Contract(abi, "0x02386219c8ca466b820f56426c444b8eb157156d49795eaaeb37f9dbdf589430",
+wallet.account)) : null
+
+}
+```
+
+
 
 ```{ojs}
 //| panel: sidebar
 //| echo: false
 
-import { connectWallet  } from "/posts/0_hello_wallet/index.qmd";
+import { connectWallet, starknetjs  } from "/posts/0_hello_wallet/index.qmd";
 d3 = require("d3@6");
 
 viewof wallet = Inputs.button("Connect", {value: null, reduce: connectWallet})
 
 viewof game_id = Inputs.range([0, 255], {step: 1, label: "Game Id"})
 
+async function createGame(v) {
+    var txn = await contract.init_new_game()
+    console.log(txn);
+    return txn;
 
-viewof counter = Inputs.button([
-  ["Create", value => (e) => console.log("create")],
-  ["Join", value => (e) => console.log("join")]
+}
 
-], {value: 0, label: "Game"})
+async function joinGame(v) {
+    console.log(game_id);
+    var txn = await contract.join_game(game_id)
+    console.log(txn);
+    return txn;
+
+}
+
+viewof txn_state = Inputs.button([
+  ["Create", createGame],
+  ["Join", joinGame],
+  ["Submit move", value => console.log("submit")]  
+
+], {value: null, label: "Game"})
 
 ```
 
 
 ::: {.panel-tabset}
 ## game
+
 ```{ojs}
 //| echo: false
 __card = renderGame()
+```
+
+## debugging
+
+```{ojs}
+txn_state
+
+```
+
+```{ojs}
+txn_status = pollTxn(txn_state, 1000)
+```
+
+```{ojs}
+c_game_state = {
+       let game_id = await contract.player_to_game_id(wallet.selectedAddress); 
+       let game_state = await contract.game_id_to_game(game_id.game_idx)
+       return [game_id.game_idx, game_state]
+    
+
+}
+```
+
+```{ojs}
+c_game_state
+```
+
+
+
+```{ojs}
+wallet.selectedAddress
+```
+
+```{ojs}
+contract
+```
+
+```{ojs}
+wallet
 ```
 :::
 
@@ -56,6 +121,24 @@ struct Game {
 }
 ```
 
+```{ojs}
+async function* pollTxn(tx, timeout) {
+ while(true) {
+  var last_response = ''; 
+  let receipt = await wallet.provider.getTransactionReceipt(tx.transaction_hash)
+  if (receipt.status == 'REJECTED' || receipt.status == 'ACCEPTED_ON_L2') {
+    return receipt;
+  } else {
+    await Promises.delay(timeout);
+    if (last_response != receipt.status) {
+    yield receipt;
+    }
+    last_response = receipt.status;
+   
+  }
+  }
+}
+```
 
 
 ### coordinating game session
@@ -154,14 +237,24 @@ function handleTurn(state, col, row) {
   if (state.board[col][row] === 0) {
     if (state.turn % 2 === 0) {
       state.board[col][row] = X_PLAYER;
-      state.x_player_state = state.x_player_state + cr_to_binary(col, row)
+      state.my_potential_move = [ cr_to_binary(col, row)  , [col, row] ]
+
     } else {
       state.board[col][row] = O_PLAYER;
-      state.o_player_state = state.o_player_state + cr_to_binary(col, row)      
+      state.my_potential_move = [ cr_to_binary(col, row)  , [col, row] ]
     }
     state.turn++;
     // winGame(state);
     console.log(state, col, row);
+  } else {
+    let bival = state.my_potential_move[0];
+    let [p_c, p_r] = state.my_potential_move[1]
+    if (p_c == col && p_r == row) {
+    state.my_potential_move = null;
+    state.board[col][row] = 0;
+     
+     }
+
   }
 }
 
@@ -177,7 +270,7 @@ createState = () => {
     .range(GRID_HEIGHT)
     .map(() => d3.range(GRID_WIDTH).map(() => 0));
   //state[2][2] = 1;
-  return { board, turn: 0, winner: 0, x_player_state: 0, o_player_state: 0 };
+  return { board, turn: 0, winner: 0, x_player_state: 0, o_player_state: 0, my_potential_move: null };
 }
 ```
 

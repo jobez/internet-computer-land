@@ -66,10 +66,7 @@ wallet.selectedAddress
 ```
 
 ```{ojs}
-c_game_state
-```
-```{ojs}
-role
+operative_state
 ```
 
 ```{ojs}
@@ -81,30 +78,72 @@ txn_state
  txn_status = null // pollTxn(txn_state, 1000)
 ```
 
+
+
 ```{ojs}
-c_game_state = {
-     if (contract) {
+
+operative_state = {
+
+    if (contract) {
+    let c_game_state = await getGameState();
+    let player_role = getRole(c_game_state);    
+    let shouldMove = ourTurn(player_role, c_game_state);
+    c_game_state[1].state_x = c_game_state[1].state_x.toNumber();
+    c_game_state[1].state_o = c_game_state[1].state_o.toNumber();    
+    c_game_state.push(shouldMove)
+    return c_game_state;
+    }
+
+}
+
+```
+
+```{ojs}
+function ourTurn(role, game_state) {
+    var last_mover = game_state.last_mover
+    console.log("here", last_mover, role);    
+    if (role == "X") {
+        if (last_mover == 0  || last_mover == 2) {
+        return true;
+       }
+    
+    } else {
+    
+    if ( last_mover == 1) {
+        return true;
+    }
+    
+    }
+    
+
+    return false;
+
+
+
+
+}
+
+```
+
+
+```{ojs}
+async function getGameState() {
        let game_id = await contract.player_to_game_id(wallet.selectedAddress); 
        let game_state = await contract.game_id_to_game(game_id.game_idx)
        return [game_id.game_idx, game_state.game]
     }
-
-}
 ```
 
 
 
 
 
-
-
 ```{ojs}
-role = {
+function getRole (c_game_state) {
 
     let hex_address_o = starknetjs.number.toHex(c_game_state[1].player_o).toString().slice(2);
     let hex_address_x = starknetjs.number.toHex(c_game_state[1].player_x).toString().slice(2);
     let formatted_addr = wallet.selectedAddress.slice(3);
-    console.log(hex_address_x, hex_address_o, formatted_addr);
     if (hex_address_o == formatted_addr) {
         return "O";
         
@@ -177,10 +216,11 @@ A game needs two players. Since the game is going to be played 'across' a contra
 
 
 ```{ojs}
-async function* renderGame() {
+async function* renderGame(contractState) {
   const state = createState();
   while (true) {
     let body = null;
+    let contractState
     const p = new Promise((resolve) => {
       body = renderGrid(state, resolve);
     });
@@ -192,9 +232,26 @@ async function* renderGame() {
 ```
 
 ```{ojs}
-function renderBox(cellValue, onClick) {
-  //const charLut = [``, X_PLAYER, O_PLAYER];
-  // const charLut = ['', 'X', 'O']; 
+function renderBox(cr, cellValue, onClick) {
+  if (operative_state) {  
+    let contractState = operative_state[1];
+    let shouldMove = operative_state[2];
+    let xState = contractState.state_x;
+    let oState = contractState.state_o;
+    let binaryRep = cr_to_binary(cr[0], cr[1]);
+    let maybeX = xState & binaryRep;
+    let maybeO = oState & binaryRep;
+    console.log(cr, binaryRep, maybeX, xState, maybeO, oState);
+    if (maybeX == binaryRep) {
+        cellValue = 1;
+    }
+    if (maybeO == binaryRep) {
+        cellValue = 2;
+    }
+    
+
+ }
+  
   const box = html`
     <div
       style="
@@ -229,8 +286,8 @@ renderGrid = (state, onChange) =>
       border: 2px solid black;
     ">${d3.range(GRID_WIDTH).map((row) => {
       return html`<div>${d3.range(GRID_HEIGHT).map((col) =>
-        renderBox(state.board[col][row], () => {
-          handleTurn(state, col, row); //state[col][row] = (state[col][row] + 1) % 3;
+        renderBox([col, row], state.board[col][row], () => {
+          handleTurn(state, col, row); 
           onChange();
           //}
         })

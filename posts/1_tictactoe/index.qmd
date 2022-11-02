@@ -6,7 +6,7 @@ title: "bitwise tictactoe"
 //| echo: false
 contract = {
 var abi = await FileAttachment("tictactoe_abi.json").json()
-return wallet ? (new starknetjs.Contract(abi, "0x02d73095244b035d7eae13918444cf9938ad7cf0c1a985e13d927ca670c2b111",
+return wallet ? (new starknetjs.Contract(abi, "0x04286312101599f80d59a5747048fe248183c4af09cab90c27c5e3e5ad234765",
 wallet.account)) : null
 
 }
@@ -42,8 +42,8 @@ async function joinGame(v) {
 
 viewof txn_state = Inputs.button([
   ["Create", createGame],
-  ["Join", joinGame],
-  ["Submit move", value => console.log("submit")]  
+  ["Join", joinGame]
+//  ["Submit move", value => console.log("submit")]  
 
 ], {value: null, label: "Game"})
 
@@ -66,7 +66,8 @@ wallet.selectedAddress
 ```
 
 ```{ojs}
-operative_state
+mutable operativeContractState = undefined;
+operativeContractState;
 ```
 
 ```{ojs}
@@ -82,16 +83,23 @@ txn_state
 
 ```{ojs}
 
-operative_state = {
+async function fetchContractState () {
 
     if (contract) {
     let c_game_state = await getGameState();
-    let player_role = getRole(c_game_state);    
-    let shouldMove = ourTurn(player_role, c_game_state);
+    let playerRole = getRole(c_game_state);    
+    let shouldMove = ourTurn(playerRole, c_game_state[1]);
     c_game_state[1].state_x = c_game_state[1].state_x.toNumber();
     c_game_state[1].state_o = c_game_state[1].state_o.toNumber();    
+    c_game_state.push(playerRole)
     c_game_state.push(shouldMove)
+    mutable operativeContractState = c_game_state
     return c_game_state;
+
+    } else {
+    
+      return [starknetjs.number.toBN(0), {}, -1];  
+    
     }
 
 }
@@ -99,10 +107,10 @@ operative_state = {
 ```
 
 ```{ojs}
-function ourTurn(role, game_state) {
-    var last_mover = game_state.last_mover
-    console.log("here", last_mover, role);    
-    if (role == "X") {
+function ourTurn(role, contractState) {
+    var last_mover = contractState.last_mover.toNumber();
+
+    if (role == 1) {
         if (last_mover == 0  || last_mover == 2) {
         return true;
        }
@@ -145,15 +153,15 @@ function getRole (c_game_state) {
     let hex_address_x = starknetjs.number.toHex(c_game_state[1].player_x).toString().slice(2);
     let formatted_addr = wallet.selectedAddress.slice(3);
     if (hex_address_o == formatted_addr) {
-        return "O";
+        return 2;
         
     } 
     
     if (hex_address_x == formatted_addr) {
-        return "X";
+        return 1;
     }
     
-    return "NONE";
+    return 0;
 
 }
 ```
@@ -191,6 +199,29 @@ struct Game {
 ```
 
 ```{ojs}
+async function handleTxn(state) {
+    let txnHash = state.pendingTxn.transaction_hash;
+    let receipt =  await wallet.provider.getTransactionReceipt(txnHash);
+    if (receipt.status == 'REJECTED' || receipt.status == 'ACCEPTED_ON_L2') {
+    
+        state.pendingTxn = null;
+        state.txnState = null;
+    
+    } else {
+    
+        state.txnState = receipt;
+    
+    }
+    
+
+
+}
+
+
+```
+
+
+```{ojs}
 async function* pollTxn(tx, timeout) {
  while(true) {
   var last_response = ''; 
@@ -216,41 +247,57 @@ A game needs two players. Since the game is going to be played 'across' a contra
 
 
 ```{ojs}
-async function* renderGame(contractState) {
-  const state = createState();
+async function* renderGame() {
+  const viewState = createState();
+  var contractState = [starknetjs.number.toBN(0), {}, -1];  
   while (true) {
     let body = null;
-    let contractState
-    const p = new Promise((resolve) => {
-      body = renderGrid(state, resolve);
+    
+    const p = new Promise(async (resolve) => {
+      console.log("about to render", contractState, viewState);
+      body = renderGrid(contractState, viewState, resolve);
+      contractState = await fetchContractState();
+      if (contract) {
+      
+      if(viewState.pendingTxn) {
+      
+         await handleTxn(viewState)  
+         resolve() 
+      
+      } else {
+      
+      await Promises.delay(8000);
+      resolve();
+      
+      }
+      }
     });
 
     yield body;
+
     await p;
   }
 }
 ```
 
 ```{ojs}
-function renderBox(cr, cellValue, onClick) {
-  if (operative_state) {  
-    let contractState = operative_state[1];
-    let shouldMove = operative_state[2];
-    let xState = contractState.state_x;
-    let oState = contractState.state_o;
-    let binaryRep = cr_to_binary(cr[0], cr[1]);
-    let maybeX = xState & binaryRep;
-    let maybeO = oState & binaryRep;
-    console.log(cr, binaryRep, maybeX, xState, maybeO, oState);
+function renderBox(contractState, cr, cellValue, onClick) {
+     let boardState = contractState[1];
+     let xState = boardState.state_x;
+     let oState = boardState.state_o;
+     let binaryRep = cr_to_binary(cr[0], cr[1]);
+     let maybeX = xState & binaryRep;
+     let maybeO = oState & binaryRep;
+
     if (maybeX == binaryRep) {
         cellValue = 1;
     }
     if (maybeO == binaryRep) {
         cellValue = 2;
     }
-    
+ 
 
- }
+ 
   
   const box = html`
     <div
@@ -267,18 +314,79 @@ function renderBox(cr, cellValue, onClick) {
   </div>`;
 
   box.addEventListener("click", onClick);
+
   //render box cares not about what the clicking does
   return box;
 }
 ```
 
 ```{ojs}
+function boardStateForRole(role, contractState) {
+    let boardState = undefined;
+    if (role == 1) {
+    
+        boardState = contractState.state_x
+        
+    } else if (role == 2) {
+    
+        boardState = contractState.state_o
+    
+    }
+    
+    return boardState;
+}
+```
 
-renderGrid = (state, onChange) =>
-  html`
+```{ojs}
+txnView = (contractState, viewState) => {
+    if (viewState.pendingTxn) {
+    
+    return html`<div>Txn: ${viewState.pendingTxn.transaction_hash} Current status: ${viewState.txnState ? viewState.txnState.status : "pending"}</div>`
+    
+    } else {
+    
+      return "";  
+    }
+}
+
+```
+
+```{ojs}
+
+turnView = (contractState, viewState) => {
+    let ourTurn = contractState[3];
+    return html`<div>${ourTurn ? "Your turn." : "Their turn"}</div>`
+
+}
+
+```
+
+```{ojs}
+
+renderGrid = (contractState, state, onChange) => {
+  let button = html`<button>Submit move</button>`
+
+  let submitMove = async (e) => {
+     let gameId = contractState[0].toNumber();
+     let role = contractState[2];
+     let moveToSubmit = state.my_potential_move[0];
+     let boardState = boardStateForRole(role, contractState[1]); 
+     let playerTotalBoardState = moveToSubmit + boardState;
+     let txn = await contract.make_move(gameId, playerTotalBoardState);
+     state.pendingTxn = txn
+     onChange();
+  }
+  button.addEventListener("click", submitMove)
+  
+  let txnViewer = txnView(contractState, state);
+  return html`
   <div style="display:flex; flex-direction: column; justify-content: center; align-items: center;">
     <h1 style="font-size: 5em;color: red">Tic-Tac-Toe</h1>
     <h2> Winner is ${charLut[state.winner]}</h2> 
+    <h4>Current Game Id : ${contractState[0].toNumber()}</h2>
+    ${button}
+    ${txnViewer}
+    ${turnView(contractState, state)}
     <div style="
       display:inline-flex;
       justify-content: center;
@@ -286,8 +394,8 @@ renderGrid = (state, onChange) =>
       border: 2px solid black;
     ">${d3.range(GRID_WIDTH).map((row) => {
       return html`<div>${d3.range(GRID_HEIGHT).map((col) =>
-        renderBox([col, row], state.board[col][row], () => {
-          handleTurn(state, col, row); 
+        renderBox(contractState, [col, row], state.board[col][row], () => {
+          handleTurn(contractState, state, col, row); 
           onChange();
           //}
         })
@@ -295,6 +403,7 @@ renderGrid = (state, onChange) =>
     })}
     </div>
   </div>`
+  }
 
 ```
 
@@ -320,16 +429,14 @@ function cr_to_binary(col, row) {
 ```
 
 ```{ojs}
-function handleTurn(state, col, row) {
+function handleTurn(contractState, state, col, row) {
+  let role = contractState[2];
+
   if (state.board[col][row] === 0) {
-    if (state.turn % 2 === 0) {
-      state.board[col][row] = X_PLAYER;
+      state.board[col][row] = role;
       state.my_potential_move = [ cr_to_binary(col, row)  , [col, row] ]
 
-    } else {
-      state.board[col][row] = O_PLAYER;
-      state.my_potential_move = [ cr_to_binary(col, row)  , [col, row] ]
-    }
+
     state.turn++;
     // winGame(state);
     console.log(state, col, row);
@@ -357,7 +464,7 @@ createState = () => {
     .range(GRID_HEIGHT)
     .map(() => d3.range(GRID_WIDTH).map(() => 0));
   //state[2][2] = 1;
-  return { board, turn: 0, winner: 0, x_player_state: 0, o_player_state: 0, my_potential_move: null };
+  return { board, turn: 0, winner: 0, x_player_state: 0, o_player_state: 0, my_potential_move: null, pendingTxn: null, txnState: null };
 }
 ```
 

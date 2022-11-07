@@ -37,6 +37,25 @@
         "type": "struct"
     },
     {
+        "data": [
+            {
+                "name": "game_id",
+                "type": "felt"
+            },
+            {
+                "name": "role",
+                "type": "felt"
+            },
+            {
+                "name": "winner",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "game_over",
+        "type": "event"
+    },
+    {
         "inputs": [
             {
                 "name": "address",

@@ -6,7 +6,7 @@ title: "bitwise tictactoe"
 //| echo: false
 contract = {
 var abi = await FileAttachment("tictactoe_abi.json").json()
-return wallet ? (new starknetjs.Contract(abi, "0x04286312101599f80d59a5747048fe248183c4af09cab90c27c5e3e5ad234765",
+return wallet ? (new starknetjs.Contract(abi, "0x02a21ef6a5f000e6647857c88b46a66c54df282d88ca6be7d86079672e5f51b4",
 wallet.account)) : null
 
 }
@@ -59,6 +59,13 @@ __card = renderGame()
 ```
 
 ## debugging
+
+```{ojs}
+//| echo: true
+// "0xdabba9ce03ade36611d5d401193a84cd9e1d9ee37a87ce9bbab55690fcfae0"
+selector_name = starknetjs.hash.getSelectorFromName("game_over");
+selector_name;
+```
 
 ```{ojs}
 wallet.selectedAddress
@@ -203,13 +210,14 @@ async function handleTxn(state) {
     let txnHash = state.pendingTxn.transaction_hash;
     let receipt =  await wallet.provider.getTransactionReceipt(txnHash);
     if (receipt.status == 'REJECTED' || receipt.status == 'ACCEPTED_ON_L2') {
-    
+
         state.pendingTxn = null;
-        state.txnState = null;
+        // state.txnState = null;
     
     } else {
     
         state.txnState = receipt;
+        console.log(receipt);
     
     }
     

@@ -174,7 +174,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code hidden" id="cb1" data-startfrom="6" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 5;"><span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>contract <span class="op">=</span> {</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> abi <span class="op">=</span> <span class="cf">await</span> <span class="fu">FileAttachment</span>(<span class="st">"tictactoe_abi.json"</span>)<span class="op">.</span><span class="fu">json</span>()</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> wallet <span class="op">?</span> (<span class="kw">new</span> starknetjs<span class="op">.</span><span class="fu">Contract</span>(abi<span class="op">,</span> <span class="st">"0x04286312101599f80d59a5747048fe248183c4af09cab90c27c5e3e5ad234765"</span><span class="op">,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> wallet <span class="op">?</span> (<span class="kw">new</span> starknetjs<span class="op">.</span><span class="fu">Contract</span>(abi<span class="op">,</span> <span class="st">"0x02a21ef6a5f000e6647857c88b46a66c54df282d88ca6be7d86079672e5f51b4"</span><span class="op">,</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>wallet<span class="op">.</span><span class="at">account</span>)) <span class="op">:</span> <span class="kw">null</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -279,68 +279,59 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4" data-startfrom="63" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 62;"><span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>wallet<span class="op">.</span><span class="at">selectedAddress</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div id="ojs-cell-4" data-nodetype="expression">
-
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5" data-startfrom="69" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 68;"><span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>mutable operativeContractState <span class="op">=</span> <span class="kw">undefined</span><span class="op">;</span></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>operativeContractState<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4" data-startfrom="66" data-source-offset="-70"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 65;"><span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>selector_name <span class="op">=</span> starknetjs<span class="op">.</span><span class="at">hash</span><span class="op">.</span><span class="fu">getSelectorFromName</span>(<span class="st">"game_over"</span>)<span class="op">;</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>selector_name<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-5-1" data-nodetype="declaration">
+<div id="ojs-cell-4-1" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-5-2" data-nodetype="expression">
+<div id="ojs-cell-4-2" data-nodetype="expression">
 
 </div>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6" data-startfrom="73" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 72;"><span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>txn_state</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5" data-startfrom="70" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 69;"><span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>wallet<span class="op">.</span><span class="at">selectedAddress</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-6" data-nodetype="expression">
+<div id="ojs-cell-5" data-nodetype="expression">
 
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7" data-startfrom="78" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 77;"><span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a>txn_status <span class="op">=</span> <span class="kw">null</span> <span class="co">// pollTxn(txn_state, 1000)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6" data-startfrom="76" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 75;"><span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>mutable operativeContractState <span class="op">=</span> <span class="kw">undefined</span><span class="op">;</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>operativeContractState<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-7" data-nodetype="declaration">
+<div>
+<div id="ojs-cell-6-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-6-2" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" data-startfrom="80" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 79;"><span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>txn_state</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-7" data-nodetype="expression">
 
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8" data-startfrom="84" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 83;"><span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">fetchContractState</span> () {</span>
-<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (contract) {</span>
-<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> c_game_state <span class="op">=</span> <span class="cf">await</span> <span class="fu">getGameState</span>()<span class="op">;</span></span>
-<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> playerRole <span class="op">=</span> <span class="fu">getRole</span>(c_game_state)<span class="op">;</span>    </span>
-<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> shouldMove <span class="op">=</span> <span class="fu">ourTurn</span>(playerRole<span class="op">,</span> c_game_state[<span class="dv">1</span>])<span class="op">;</span></span>
-<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a>    c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">state_x</span> <span class="op">=</span> c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">state_x</span><span class="op">.</span><span class="fu">toNumber</span>()<span class="op">;</span></span>
-<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a>    c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">state_o</span> <span class="op">=</span> c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">state_o</span><span class="op">.</span><span class="fu">toNumber</span>()<span class="op">;</span>    </span>
-<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a>    c_game_state<span class="op">.</span><span class="fu">push</span>(playerRole)</span>
-<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a>    c_game_state<span class="op">.</span><span class="fu">push</span>(shouldMove)</span>
-<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a>    mutable operativeContractState <span class="op">=</span> c_game_state</span>
-<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c_game_state<span class="op">;</span></span>
-<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> [starknetjs<span class="op">.</span><span class="at">number</span><span class="op">.</span><span class="fu">toBN</span>(<span class="dv">0</span>)<span class="op">,</span> {}<span class="op">,</span> <span class="op">-</span><span class="dv">1</span>]<span class="op">;</span>  </span>
-<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8" data-startfrom="85" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 84;"><span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a>txn_status <span class="op">=</span> <span class="kw">null</span> <span class="co">// pollTxn(txn_state, 1000)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-8" data-nodetype="declaration">
 
@@ -348,29 +339,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" data-startfrom="109" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 108;"><span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">ourTurn</span>(role<span class="op">,</span> contractState) {</span>
-<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> last_mover <span class="op">=</span> contractState<span class="op">.</span><span class="at">last_mover</span><span class="op">.</span><span class="fu">toNumber</span>()<span class="op">;</span></span>
-<span id="cb9-111"><a href="#cb9-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-112"><a href="#cb9-112" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (role <span class="op">==</span> <span class="dv">1</span>) {</span>
-<span id="cb9-113"><a href="#cb9-113" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (last_mover <span class="op">==</span> <span class="dv">0</span>  <span class="op">||</span> last_mover <span class="op">==</span> <span class="dv">2</span>) {</span>
-<span id="cb9-114"><a href="#cb9-114" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb9-115"><a href="#cb9-115" aria-hidden="true" tabindex="-1"></a>       }</span>
-<span id="cb9-116"><a href="#cb9-116" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-117"><a href="#cb9-117" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb9-118"><a href="#cb9-118" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-119"><a href="#cb9-119" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ( last_mover <span class="op">==</span> <span class="dv">1</span>) {</span>
-<span id="cb9-120"><a href="#cb9-120" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
-<span id="cb9-121"><a href="#cb9-121" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb9-122"><a href="#cb9-122" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-123"><a href="#cb9-123" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb9-124"><a href="#cb9-124" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
-<span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9" data-startfrom="91" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 90;"><span id="cb9-91"><a href="#cb9-91" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">fetchContractState</span> () {</span>
+<span id="cb9-92"><a href="#cb9-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-93"><a href="#cb9-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (contract) {</span>
+<span id="cb9-94"><a href="#cb9-94" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> c_game_state <span class="op">=</span> <span class="cf">await</span> <span class="fu">getGameState</span>()<span class="op">;</span></span>
+<span id="cb9-95"><a href="#cb9-95" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> playerRole <span class="op">=</span> <span class="fu">getRole</span>(c_game_state)<span class="op">;</span>    </span>
+<span id="cb9-96"><a href="#cb9-96" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> shouldMove <span class="op">=</span> <span class="fu">ourTurn</span>(playerRole<span class="op">,</span> c_game_state[<span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb9-97"><a href="#cb9-97" aria-hidden="true" tabindex="-1"></a>    c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">state_x</span> <span class="op">=</span> c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">state_x</span><span class="op">.</span><span class="fu">toNumber</span>()<span class="op">;</span></span>
+<span id="cb9-98"><a href="#cb9-98" aria-hidden="true" tabindex="-1"></a>    c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">state_o</span> <span class="op">=</span> c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">state_o</span><span class="op">.</span><span class="fu">toNumber</span>()<span class="op">;</span>    </span>
+<span id="cb9-99"><a href="#cb9-99" aria-hidden="true" tabindex="-1"></a>    c_game_state<span class="op">.</span><span class="fu">push</span>(playerRole)</span>
+<span id="cb9-100"><a href="#cb9-100" aria-hidden="true" tabindex="-1"></a>    c_game_state<span class="op">.</span><span class="fu">push</span>(shouldMove)</span>
+<span id="cb9-101"><a href="#cb9-101" aria-hidden="true" tabindex="-1"></a>    mutable operativeContractState <span class="op">=</span> c_game_state</span>
+<span id="cb9-102"><a href="#cb9-102" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c_game_state<span class="op">;</span></span>
+<span id="cb9-103"><a href="#cb9-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-104"><a href="#cb9-104" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb9-105"><a href="#cb9-105" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-106"><a href="#cb9-106" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> [starknetjs<span class="op">.</span><span class="at">number</span><span class="op">.</span><span class="fu">toBN</span>(<span class="dv">0</span>)<span class="op">,</span> {}<span class="op">,</span> <span class="op">-</span><span class="dv">1</span>]<span class="op">;</span>  </span>
+<span id="cb9-107"><a href="#cb9-107" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb9-108"><a href="#cb9-108" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb9-109"><a href="#cb9-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-110"><a href="#cb9-110" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-9" data-nodetype="declaration">
 
@@ -378,11 +366,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10" data-startfrom="137" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 136;"><span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">getGameState</span>() {</span>
-<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a>       <span class="kw">let</span> game_id <span class="op">=</span> <span class="cf">await</span> contract<span class="op">.</span><span class="fu">player_to_game_id</span>(wallet<span class="op">.</span><span class="at">selectedAddress</span>)<span class="op">;</span> </span>
-<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a>       <span class="kw">let</span> game_state <span class="op">=</span> <span class="cf">await</span> contract<span class="op">.</span><span class="fu">game_id_to_game</span>(game_id<span class="op">.</span><span class="at">game_idx</span>)</span>
-<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a>       <span class="cf">return</span> [game_id<span class="op">.</span><span class="at">game_idx</span><span class="op">,</span> game_state<span class="op">.</span><span class="at">game</span>]</span>
-<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10" data-startfrom="116" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 115;"><span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">ourTurn</span>(role<span class="op">,</span> contractState) {</span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> last_mover <span class="op">=</span> contractState<span class="op">.</span><span class="at">last_mover</span><span class="op">.</span><span class="fu">toNumber</span>()<span class="op">;</span></span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (role <span class="op">==</span> <span class="dv">1</span>) {</span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (last_mover <span class="op">==</span> <span class="dv">0</span>  <span class="op">||</span> last_mover <span class="op">==</span> <span class="dv">2</span>) {</span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a>       }</span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> ( last_mover <span class="op">==</span> <span class="dv">1</span>) {</span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-10" data-nodetype="declaration">
 
@@ -390,23 +396,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11" data-startfrom="149" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 148;"><span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getRole</span> (c_game_state) {</span>
-<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> hex_address_o <span class="op">=</span> starknetjs<span class="op">.</span><span class="at">number</span><span class="op">.</span><span class="fu">toHex</span>(c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">player_o</span>)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">slice</span>(<span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> hex_address_x <span class="op">=</span> starknetjs<span class="op">.</span><span class="at">number</span><span class="op">.</span><span class="fu">toHex</span>(c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">player_x</span>)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">slice</span>(<span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> formatted_addr <span class="op">=</span> wallet<span class="op">.</span><span class="at">selectedAddress</span><span class="op">.</span><span class="fu">slice</span>(<span class="dv">3</span>)<span class="op">;</span></span>
-<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (hex_address_o <span class="op">==</span> formatted_addr) {</span>
-<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a>    } </span>
-<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (hex_address_x <span class="op">==</span> formatted_addr) {</span>
-<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11" data-startfrom="144" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 143;"><span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">getGameState</span>() {</span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a>       <span class="kw">let</span> game_id <span class="op">=</span> <span class="cf">await</span> contract<span class="op">.</span><span class="fu">player_to_game_id</span>(wallet<span class="op">.</span><span class="at">selectedAddress</span>)<span class="op">;</span> </span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a>       <span class="kw">let</span> game_state <span class="op">=</span> <span class="cf">await</span> contract<span class="op">.</span><span class="fu">game_id_to_game</span>(game_id<span class="op">.</span><span class="at">game_idx</span>)</span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a>       <span class="cf">return</span> [game_id<span class="op">.</span><span class="at">game_idx</span><span class="op">,</span> game_state<span class="op">.</span><span class="at">game</span>]</span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-11" data-nodetype="declaration">
 
@@ -414,17 +408,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12" data-startfrom="169" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 168;"><span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a>contract</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12" data-startfrom="156" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 155;"><span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">getRole</span> (c_game_state) {</span>
+<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> hex_address_o <span class="op">=</span> starknetjs<span class="op">.</span><span class="at">number</span><span class="op">.</span><span class="fu">toHex</span>(c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">player_o</span>)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">slice</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> hex_address_x <span class="op">=</span> starknetjs<span class="op">.</span><span class="at">number</span><span class="op">.</span><span class="fu">toHex</span>(c_game_state[<span class="dv">1</span>]<span class="op">.</span><span class="at">player_x</span>)<span class="op">.</span><span class="fu">toString</span>()<span class="op">.</span><span class="fu">slice</span>(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> formatted_addr <span class="op">=</span> wallet<span class="op">.</span><span class="at">selectedAddress</span><span class="op">.</span><span class="fu">slice</span>(<span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (hex_address_o <span class="op">==</span> formatted_addr) {</span>
+<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a>    } </span>
+<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (hex_address_x <span class="op">==</span> formatted_addr) {</span>
+<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb12-168"><a href="#cb12-168" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-169"><a href="#cb12-169" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-170"><a href="#cb12-170" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb12-171"><a href="#cb12-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-172"><a href="#cb12-172" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-12" data-nodetype="expression">
+<div id="ojs-cell-12" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13" data-startfrom="173" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 172;"><span id="cb13-173"><a href="#cb13-173" aria-hidden="true" tabindex="-1"></a>wallet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13" data-startfrom="176" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 175;"><span id="cb13-176"><a href="#cb13-176" aria-hidden="true" tabindex="-1"></a>contract</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-13" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14" data-startfrom="180" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 179;"><span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a>wallet</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-14" data-nodetype="expression">
 
 </div>
 </div>
@@ -450,48 +468,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     completed: felt,
 }</code></pre>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15" data-startfrom="201" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 200;"><span id="cb15-201"><a href="#cb15-201" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">handleTxn</span>(state) {</span>
-<span id="cb15-202"><a href="#cb15-202" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> txnHash <span class="op">=</span> state<span class="op">.</span><span class="at">pendingTxn</span><span class="op">.</span><span class="at">transaction_hash</span><span class="op">;</span></span>
-<span id="cb15-203"><a href="#cb15-203" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> receipt <span class="op">=</span>  <span class="cf">await</span> wallet<span class="op">.</span><span class="at">provider</span><span class="op">.</span><span class="fu">getTransactionReceipt</span>(txnHash)<span class="op">;</span></span>
-<span id="cb15-204"><a href="#cb15-204" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'REJECTED'</span> <span class="op">||</span> receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'ACCEPTED_ON_L2'</span>) {</span>
-<span id="cb15-205"><a href="#cb15-205" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-206"><a href="#cb15-206" aria-hidden="true" tabindex="-1"></a>        state<span class="op">.</span><span class="at">pendingTxn</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb15-207"><a href="#cb15-207" aria-hidden="true" tabindex="-1"></a>        state<span class="op">.</span><span class="at">txnState</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb15-208"><a href="#cb15-208" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-209"><a href="#cb15-209" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb15-210"><a href="#cb15-210" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-211"><a href="#cb15-211" aria-hidden="true" tabindex="-1"></a>        state<span class="op">.</span><span class="at">txnState</span> <span class="op">=</span> receipt<span class="op">;</span></span>
-<span id="cb15-212"><a href="#cb15-212" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-213"><a href="#cb15-213" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb15-214"><a href="#cb15-214" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb15-215"><a href="#cb15-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-216"><a href="#cb15-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-217"><a href="#cb15-217" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16" data-startfrom="208" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 207;"><span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span> <span class="fu">handleTxn</span>(state) {</span>
+<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> txnHash <span class="op">=</span> state<span class="op">.</span><span class="at">pendingTxn</span><span class="op">.</span><span class="at">transaction_hash</span><span class="op">;</span></span>
+<span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> receipt <span class="op">=</span>  <span class="cf">await</span> wallet<span class="op">.</span><span class="at">provider</span><span class="op">.</span><span class="fu">getTransactionReceipt</span>(txnHash)<span class="op">;</span></span>
+<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'REJECTED'</span> <span class="op">||</span> receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'ACCEPTED_ON_L2'</span>) {</span>
+<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a>        state<span class="op">.</span><span class="at">pendingTxn</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a>        <span class="co">// state.txnState = null;</span></span>
+<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a>        state<span class="op">.</span><span class="at">txnState</span> <span class="op">=</span> receipt<span class="op">;</span></span>
+<span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(receipt)<span class="op">;</span></span>
+<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-14" data-nodetype="declaration">
+<div id="ojs-cell-15" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16" data-startfrom="224" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 223;"><span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span><span class="op">*</span> <span class="fu">pollTxn</span>(tx<span class="op">,</span> timeout) {</span>
-<span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a> <span class="cf">while</span>(<span class="kw">true</span>) {</span>
-<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> last_response <span class="op">=</span> <span class="st">''</span><span class="op">;</span> </span>
-<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> receipt <span class="op">=</span> <span class="cf">await</span> wallet<span class="op">.</span><span class="at">provider</span><span class="op">.</span><span class="fu">getTransactionReceipt</span>(tx<span class="op">.</span><span class="at">transaction_hash</span>)</span>
-<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'REJECTED'</span> <span class="op">||</span> receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'ACCEPTED_ON_L2'</span>) {</span>
-<span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> receipt<span class="op">;</span></span>
-<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> Promises<span class="op">.</span><span class="fu">delay</span>(timeout)<span class="op">;</span></span>
-<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (last_response <span class="op">!=</span> receipt<span class="op">.</span><span class="at">status</span>) {</span>
-<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> receipt<span class="op">;</span></span>
-<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a>    last_response <span class="op">=</span> receipt<span class="op">.</span><span class="at">status</span><span class="op">;</span></span>
-<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17" data-startfrom="232" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 231;"><span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span><span class="op">*</span> <span class="fu">pollTxn</span>(tx<span class="op">,</span> timeout) {</span>
+<span id="cb17-233"><a href="#cb17-233" aria-hidden="true" tabindex="-1"></a> <span class="cf">while</span>(<span class="kw">true</span>) {</span>
+<span id="cb17-234"><a href="#cb17-234" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> last_response <span class="op">=</span> <span class="st">''</span><span class="op">;</span> </span>
+<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> receipt <span class="op">=</span> <span class="cf">await</span> wallet<span class="op">.</span><span class="at">provider</span><span class="op">.</span><span class="fu">getTransactionReceipt</span>(tx<span class="op">.</span><span class="at">transaction_hash</span>)</span>
+<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'REJECTED'</span> <span class="op">||</span> receipt<span class="op">.</span><span class="at">status</span> <span class="op">==</span> <span class="st">'ACCEPTED_ON_L2'</span>) {</span>
+<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> receipt<span class="op">;</span></span>
+<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> Promises<span class="op">.</span><span class="fu">delay</span>(timeout)<span class="op">;</span></span>
+<span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (last_response <span class="op">!=</span> receipt<span class="op">.</span><span class="at">status</span>) {</span>
+<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> receipt<span class="op">;</span></span>
+<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb17-243"><a href="#cb17-243" aria-hidden="true" tabindex="-1"></a>    last_response <span class="op">=</span> receipt<span class="op">.</span><span class="at">status</span><span class="op">;</span></span>
+<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<div id="ojs-cell-15" data-nodetype="declaration">
+<div id="ojs-cell-16" data-nodetype="declaration">
 
 </div>
 </div>
@@ -500,81 +519,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="coordinating-game-session">coordinating game session</h3>
 <p>A game needs two players. Since the game is going to be played ‘across’ a contract, we need to allow one player to create and invite another player to a game.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17" data-startfrom="249" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 248;"><span id="cb17-249"><a href="#cb17-249" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span><span class="op">*</span> <span class="fu">renderGame</span>() {</span>
-<span id="cb17-250"><a href="#cb17-250" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> viewState <span class="op">=</span> <span class="fu">createState</span>()<span class="op">;</span></span>
-<span id="cb17-251"><a href="#cb17-251" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> contractState <span class="op">=</span> [starknetjs<span class="op">.</span><span class="at">number</span><span class="op">.</span><span class="fu">toBN</span>(<span class="dv">0</span>)<span class="op">,</span> {}<span class="op">,</span> <span class="op">-</span><span class="dv">1</span>]<span class="op">;</span>  </span>
-<span id="cb17-252"><a href="#cb17-252" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="kw">true</span>) {</span>
-<span id="cb17-253"><a href="#cb17-253" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> body <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb17-254"><a href="#cb17-254" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb17-255"><a href="#cb17-255" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> p <span class="op">=</span> <span class="kw">new</span> <span class="bu">Promise</span>(<span class="kw">async</span> (resolve) <span class="kw">=&gt;</span> {</span>
-<span id="cb17-256"><a href="#cb17-256" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"about to render"</span><span class="op">,</span> contractState<span class="op">,</span> viewState)<span class="op">;</span></span>
-<span id="cb17-257"><a href="#cb17-257" aria-hidden="true" tabindex="-1"></a>      body <span class="op">=</span> <span class="fu">renderGrid</span>(contractState<span class="op">,</span> viewState<span class="op">,</span> resolve)<span class="op">;</span></span>
-<span id="cb17-258"><a href="#cb17-258" aria-hidden="true" tabindex="-1"></a>      contractState <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetchContractState</span>()<span class="op">;</span></span>
-<span id="cb17-259"><a href="#cb17-259" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (contract) {</span>
-<span id="cb17-260"><a href="#cb17-260" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb17-261"><a href="#cb17-261" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(viewState<span class="op">.</span><span class="at">pendingTxn</span>) {</span>
-<span id="cb17-262"><a href="#cb17-262" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb17-263"><a href="#cb17-263" aria-hidden="true" tabindex="-1"></a>         <span class="cf">await</span> <span class="fu">handleTxn</span>(viewState)  </span>
-<span id="cb17-264"><a href="#cb17-264" aria-hidden="true" tabindex="-1"></a>         <span class="fu">resolve</span>() </span>
-<span id="cb17-265"><a href="#cb17-265" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb17-266"><a href="#cb17-266" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
-<span id="cb17-267"><a href="#cb17-267" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb17-268"><a href="#cb17-268" aria-hidden="true" tabindex="-1"></a>      <span class="cf">await</span> Promises<span class="op">.</span><span class="fu">delay</span>(<span class="dv">8000</span>)<span class="op">;</span></span>
-<span id="cb17-269"><a href="#cb17-269" aria-hidden="true" tabindex="-1"></a>      <span class="fu">resolve</span>()<span class="op">;</span></span>
-<span id="cb17-270"><a href="#cb17-270" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb17-271"><a href="#cb17-271" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb17-272"><a href="#cb17-272" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb17-273"><a href="#cb17-273" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
-<span id="cb17-274"><a href="#cb17-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-275"><a href="#cb17-275" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> body<span class="op">;</span></span>
-<span id="cb17-276"><a href="#cb17-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-277"><a href="#cb17-277" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> p<span class="op">;</span></span>
-<span id="cb17-278"><a href="#cb17-278" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb17-279"><a href="#cb17-279" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display">
-<div id="ojs-cell-16" data-nodetype="declaration">
-
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18" data-startfrom="283" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 282;"><span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">renderBox</span>(contractState<span class="op">,</span> cr<span class="op">,</span> cellValue<span class="op">,</span> onClick) {</span>
-<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> boardState <span class="op">=</span> contractState[<span class="dv">1</span>]<span class="op">;</span></span>
-<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> xState <span class="op">=</span> boardState<span class="op">.</span><span class="at">state_x</span><span class="op">;</span></span>
-<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> oState <span class="op">=</span> boardState<span class="op">.</span><span class="at">state_o</span><span class="op">;</span></span>
-<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> binaryRep <span class="op">=</span> <span class="fu">cr_to_binary</span>(cr[<span class="dv">0</span>]<span class="op">,</span> cr[<span class="dv">1</span>])<span class="op">;</span></span>
-<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> maybeX <span class="op">=</span> xState <span class="op">&amp;</span> binaryRep<span class="op">;</span></span>
-<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> maybeO <span class="op">=</span> oState <span class="op">&amp;</span> binaryRep<span class="op">;</span></span>
-<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (maybeX <span class="op">==</span> binaryRep) {</span>
-<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a>        cellValue <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (maybeO <span class="op">==</span> binaryRep) {</span>
-<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a>        cellValue <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
-<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> box <span class="op">=</span> <span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div</span></span>
-<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a><span class="vs">      style="</span></span>
-<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a><span class="vs">        display: flex;</span></span>
-<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a><span class="vs">        align-items: center;</span></span>
-<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a><span class="vs">        justify-content: center;</span></span>
-<span id="cb18-307"><a href="#cb18-307" aria-hidden="true" tabindex="-1"></a><span class="vs">        width: 100px;</span></span>
-<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a><span class="vs">        height: 100px;</span></span>
-<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a><span class="vs">        border: 2px black solid;</span></span>
-<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a><span class="vs">        user-select: none;</span></span>
-<span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a><span class="vs">      "&gt;</span></span>
-<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a><span class="vs">     &lt;div style="font-size: 5em"&gt;</span><span class="sc">${</span>charLut[cellValue]<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb18-313"><a href="#cb18-313" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb18-314"><a href="#cb18-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a>  box<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"click"</span><span class="op">,</span> onClick)<span class="op">;</span></span>
-<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a>  <span class="co">//render box cares not about what the clicking does</span></span>
-<span id="cb18-318"><a href="#cb18-318" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> box<span class="op">;</span></span>
-<span id="cb18-319"><a href="#cb18-319" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18" data-startfrom="257" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 256;"><span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a><span class="kw">async</span> <span class="kw">function</span><span class="op">*</span> <span class="fu">renderGame</span>() {</span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> viewState <span class="op">=</span> <span class="fu">createState</span>()<span class="op">;</span></span>
+<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> contractState <span class="op">=</span> [starknetjs<span class="op">.</span><span class="at">number</span><span class="op">.</span><span class="fu">toBN</span>(<span class="dv">0</span>)<span class="op">,</span> {}<span class="op">,</span> <span class="op">-</span><span class="dv">1</span>]<span class="op">;</span>  </span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="kw">true</span>) {</span>
+<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> body <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> p <span class="op">=</span> <span class="kw">new</span> <span class="bu">Promise</span>(<span class="kw">async</span> (resolve) <span class="kw">=&gt;</span> {</span>
+<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a>      <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">"about to render"</span><span class="op">,</span> contractState<span class="op">,</span> viewState)<span class="op">;</span></span>
+<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a>      body <span class="op">=</span> <span class="fu">renderGrid</span>(contractState<span class="op">,</span> viewState<span class="op">,</span> resolve)<span class="op">;</span></span>
+<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a>      contractState <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetchContractState</span>()<span class="op">;</span></span>
+<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (contract) {</span>
+<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(viewState<span class="op">.</span><span class="at">pendingTxn</span>) {</span>
+<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a>         <span class="cf">await</span> <span class="fu">handleTxn</span>(viewState)  </span>
+<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a>         <span class="fu">resolve</span>() </span>
+<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> {</span>
+<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a>      <span class="cf">await</span> Promises<span class="op">.</span><span class="fu">delay</span>(<span class="dv">8000</span>)<span class="op">;</span></span>
+<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a>      <span class="fu">resolve</span>()<span class="op">;</span></span>
+<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a>    })<span class="op">;</span></span>
+<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a>    <span class="kw">yield</span> body<span class="op">;</span></span>
+<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> p<span class="op">;</span></span>
+<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-17" data-nodetype="declaration">
 
@@ -582,20 +557,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19" data-startfrom="323" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 322;"><span id="cb19-323"><a href="#cb19-323" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">boardStateForRole</span>(role<span class="op">,</span> contractState) {</span>
-<span id="cb19-324"><a href="#cb19-324" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> boardState <span class="op">=</span> <span class="kw">undefined</span><span class="op">;</span></span>
-<span id="cb19-325"><a href="#cb19-325" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (role <span class="op">==</span> <span class="dv">1</span>) {</span>
-<span id="cb19-326"><a href="#cb19-326" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-327"><a href="#cb19-327" aria-hidden="true" tabindex="-1"></a>        boardState <span class="op">=</span> contractState<span class="op">.</span><span class="at">state_x</span></span>
-<span id="cb19-328"><a href="#cb19-328" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb19-329"><a href="#cb19-329" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (role <span class="op">==</span> <span class="dv">2</span>) {</span>
-<span id="cb19-330"><a href="#cb19-330" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-331"><a href="#cb19-331" aria-hidden="true" tabindex="-1"></a>        boardState <span class="op">=</span> contractState<span class="op">.</span><span class="at">state_o</span></span>
-<span id="cb19-332"><a href="#cb19-332" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-333"><a href="#cb19-333" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb19-334"><a href="#cb19-334" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb19-335"><a href="#cb19-335" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> boardState<span class="op">;</span></span>
-<span id="cb19-336"><a href="#cb19-336" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19" data-startfrom="291" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 290;"><span id="cb19-291"><a href="#cb19-291" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">renderBox</span>(contractState<span class="op">,</span> cr<span class="op">,</span> cellValue<span class="op">,</span> onClick) {</span>
+<span id="cb19-292"><a href="#cb19-292" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> boardState <span class="op">=</span> contractState[<span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb19-293"><a href="#cb19-293" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> xState <span class="op">=</span> boardState<span class="op">.</span><span class="at">state_x</span><span class="op">;</span></span>
+<span id="cb19-294"><a href="#cb19-294" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> oState <span class="op">=</span> boardState<span class="op">.</span><span class="at">state_o</span><span class="op">;</span></span>
+<span id="cb19-295"><a href="#cb19-295" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> binaryRep <span class="op">=</span> <span class="fu">cr_to_binary</span>(cr[<span class="dv">0</span>]<span class="op">,</span> cr[<span class="dv">1</span>])<span class="op">;</span></span>
+<span id="cb19-296"><a href="#cb19-296" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> maybeX <span class="op">=</span> xState <span class="op">&amp;</span> binaryRep<span class="op">;</span></span>
+<span id="cb19-297"><a href="#cb19-297" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> maybeO <span class="op">=</span> oState <span class="op">&amp;</span> binaryRep<span class="op">;</span></span>
+<span id="cb19-298"><a href="#cb19-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-299"><a href="#cb19-299" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (maybeX <span class="op">==</span> binaryRep) {</span>
+<span id="cb19-300"><a href="#cb19-300" aria-hidden="true" tabindex="-1"></a>        cellValue <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb19-301"><a href="#cb19-301" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb19-302"><a href="#cb19-302" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (maybeO <span class="op">==</span> binaryRep) {</span>
+<span id="cb19-303"><a href="#cb19-303" aria-hidden="true" tabindex="-1"></a>        cellValue <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb19-304"><a href="#cb19-304" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb19-305"><a href="#cb19-305" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb19-306"><a href="#cb19-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-307"><a href="#cb19-307" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb19-308"><a href="#cb19-308" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-309"><a href="#cb19-309" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> box <span class="op">=</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb19-310"><a href="#cb19-310" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div</span></span>
+<span id="cb19-311"><a href="#cb19-311" aria-hidden="true" tabindex="-1"></a><span class="vs">      style="</span></span>
+<span id="cb19-312"><a href="#cb19-312" aria-hidden="true" tabindex="-1"></a><span class="vs">        display: flex;</span></span>
+<span id="cb19-313"><a href="#cb19-313" aria-hidden="true" tabindex="-1"></a><span class="vs">        align-items: center;</span></span>
+<span id="cb19-314"><a href="#cb19-314" aria-hidden="true" tabindex="-1"></a><span class="vs">        justify-content: center;</span></span>
+<span id="cb19-315"><a href="#cb19-315" aria-hidden="true" tabindex="-1"></a><span class="vs">        width: 100px;</span></span>
+<span id="cb19-316"><a href="#cb19-316" aria-hidden="true" tabindex="-1"></a><span class="vs">        height: 100px;</span></span>
+<span id="cb19-317"><a href="#cb19-317" aria-hidden="true" tabindex="-1"></a><span class="vs">        border: 2px black solid;</span></span>
+<span id="cb19-318"><a href="#cb19-318" aria-hidden="true" tabindex="-1"></a><span class="vs">        user-select: none;</span></span>
+<span id="cb19-319"><a href="#cb19-319" aria-hidden="true" tabindex="-1"></a><span class="vs">      "&gt;</span></span>
+<span id="cb19-320"><a href="#cb19-320" aria-hidden="true" tabindex="-1"></a><span class="vs">     &lt;div style="font-size: 5em"&gt;</span><span class="sc">${</span>charLut[cellValue]<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb19-321"><a href="#cb19-321" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb19-322"><a href="#cb19-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-323"><a href="#cb19-323" aria-hidden="true" tabindex="-1"></a>  box<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"click"</span><span class="op">,</span> onClick)<span class="op">;</span></span>
+<span id="cb19-324"><a href="#cb19-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-325"><a href="#cb19-325" aria-hidden="true" tabindex="-1"></a>  <span class="co">//render box cares not about what the clicking does</span></span>
+<span id="cb19-326"><a href="#cb19-326" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> box<span class="op">;</span></span>
+<span id="cb19-327"><a href="#cb19-327" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-18" data-nodetype="declaration">
 
@@ -603,16 +601,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20" data-startfrom="340" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 339;"><span id="cb20-340"><a href="#cb20-340" aria-hidden="true" tabindex="-1"></a>txnView <span class="op">=</span> (contractState<span class="op">,</span> viewState) <span class="kw">=&gt;</span> {</span>
-<span id="cb20-341"><a href="#cb20-341" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (viewState<span class="op">.</span><span class="at">pendingTxn</span>) {</span>
+<div class="sourceCode cell-code" id="cb20" data-startfrom="331" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 330;"><span id="cb20-331"><a href="#cb20-331" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">boardStateForRole</span>(role<span class="op">,</span> contractState) {</span>
+<span id="cb20-332"><a href="#cb20-332" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> boardState <span class="op">=</span> <span class="kw">undefined</span><span class="op">;</span></span>
+<span id="cb20-333"><a href="#cb20-333" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (role <span class="op">==</span> <span class="dv">1</span>) {</span>
+<span id="cb20-334"><a href="#cb20-334" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-335"><a href="#cb20-335" aria-hidden="true" tabindex="-1"></a>        boardState <span class="op">=</span> contractState<span class="op">.</span><span class="at">state_x</span></span>
+<span id="cb20-336"><a href="#cb20-336" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb20-337"><a href="#cb20-337" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (role <span class="op">==</span> <span class="dv">2</span>) {</span>
+<span id="cb20-338"><a href="#cb20-338" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-339"><a href="#cb20-339" aria-hidden="true" tabindex="-1"></a>        boardState <span class="op">=</span> contractState<span class="op">.</span><span class="at">state_o</span></span>
+<span id="cb20-340"><a href="#cb20-340" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-341"><a href="#cb20-341" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb20-342"><a href="#cb20-342" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-343"><a href="#cb20-343" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div&gt;Txn: </span><span class="sc">${</span>viewState<span class="op">.</span><span class="at">pendingTxn</span><span class="op">.</span><span class="at">transaction_hash</span><span class="sc">}</span><span class="vs"> Current status: </span><span class="sc">${</span>viewState<span class="op">.</span><span class="at">txnState</span> <span class="op">?</span> viewState<span class="op">.</span><span class="at">txnState</span><span class="op">.</span><span class="at">status</span> <span class="op">:</span> <span class="st">"pending"</span><span class="sc">}</span><span class="vs">&lt;/div&gt;`</span></span>
-<span id="cb20-344"><a href="#cb20-344" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-345"><a href="#cb20-345" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb20-346"><a href="#cb20-346" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb20-347"><a href="#cb20-347" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="st">""</span><span class="op">;</span>  </span>
-<span id="cb20-348"><a href="#cb20-348" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb20-349"><a href="#cb20-349" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-343"><a href="#cb20-343" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> boardState<span class="op">;</span></span>
+<span id="cb20-344"><a href="#cb20-344" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-19" data-nodetype="declaration">
 
@@ -620,11 +622,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21" data-startfrom="354" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 353;"><span id="cb21-354"><a href="#cb21-354" aria-hidden="true" tabindex="-1"></a>turnView <span class="op">=</span> (contractState<span class="op">,</span> viewState) <span class="kw">=&gt;</span> {</span>
-<span id="cb21-355"><a href="#cb21-355" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> ourTurn <span class="op">=</span> contractState[<span class="dv">3</span>]<span class="op">;</span></span>
-<span id="cb21-356"><a href="#cb21-356" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div&gt;</span><span class="sc">${</span>ourTurn <span class="op">?</span> <span class="st">"Your turn."</span> <span class="op">:</span> <span class="st">"Their turn"</span><span class="sc">}</span><span class="vs">&lt;/div&gt;`</span></span>
-<span id="cb21-357"><a href="#cb21-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-358"><a href="#cb21-358" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21" data-startfrom="348" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 347;"><span id="cb21-348"><a href="#cb21-348" aria-hidden="true" tabindex="-1"></a>txnView <span class="op">=</span> (contractState<span class="op">,</span> viewState) <span class="kw">=&gt;</span> {</span>
+<span id="cb21-349"><a href="#cb21-349" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (viewState<span class="op">.</span><span class="at">pendingTxn</span>) {</span>
+<span id="cb21-350"><a href="#cb21-350" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-351"><a href="#cb21-351" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div&gt;Txn: </span><span class="sc">${</span>viewState<span class="op">.</span><span class="at">pendingTxn</span><span class="op">.</span><span class="at">transaction_hash</span><span class="sc">}</span><span class="vs"> Current status: </span><span class="sc">${</span>viewState<span class="op">.</span><span class="at">txnState</span> <span class="op">?</span> viewState<span class="op">.</span><span class="at">txnState</span><span class="op">.</span><span class="at">status</span> <span class="op">:</span> <span class="st">"pending"</span><span class="sc">}</span><span class="vs">&lt;/div&gt;`</span></span>
+<span id="cb21-352"><a href="#cb21-352" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-353"><a href="#cb21-353" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb21-354"><a href="#cb21-354" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb21-355"><a href="#cb21-355" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="st">""</span><span class="op">;</span>  </span>
+<span id="cb21-356"><a href="#cb21-356" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb21-357"><a href="#cb21-357" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-20" data-nodetype="declaration">
 
@@ -632,47 +639,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22" data-startfrom="364" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 363;"><span id="cb22-364"><a href="#cb22-364" aria-hidden="true" tabindex="-1"></a>renderGrid <span class="op">=</span> (contractState<span class="op">,</span> state<span class="op">,</span> onChange) <span class="kw">=&gt;</span> {</span>
-<span id="cb22-365"><a href="#cb22-365" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> button <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;button&gt;Submit move&lt;/button&gt;`</span></span>
-<span id="cb22-366"><a href="#cb22-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-367"><a href="#cb22-367" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> submitMove <span class="op">=</span> <span class="kw">async</span> (e) <span class="kw">=&gt;</span> {</span>
-<span id="cb22-368"><a href="#cb22-368" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> gameId <span class="op">=</span> contractState[<span class="dv">0</span>]<span class="op">.</span><span class="fu">toNumber</span>()<span class="op">;</span></span>
-<span id="cb22-369"><a href="#cb22-369" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> role <span class="op">=</span> contractState[<span class="dv">2</span>]<span class="op">;</span></span>
-<span id="cb22-370"><a href="#cb22-370" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> moveToSubmit <span class="op">=</span> state<span class="op">.</span><span class="at">my_potential_move</span>[<span class="dv">0</span>]<span class="op">;</span></span>
-<span id="cb22-371"><a href="#cb22-371" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> boardState <span class="op">=</span> <span class="fu">boardStateForRole</span>(role<span class="op">,</span> contractState[<span class="dv">1</span>])<span class="op">;</span> </span>
-<span id="cb22-372"><a href="#cb22-372" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> playerTotalBoardState <span class="op">=</span> moveToSubmit <span class="op">+</span> boardState<span class="op">;</span></span>
-<span id="cb22-373"><a href="#cb22-373" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> txn <span class="op">=</span> <span class="cf">await</span> contract<span class="op">.</span><span class="fu">make_move</span>(gameId<span class="op">,</span> playerTotalBoardState)<span class="op">;</span></span>
-<span id="cb22-374"><a href="#cb22-374" aria-hidden="true" tabindex="-1"></a>     state<span class="op">.</span><span class="at">pendingTxn</span> <span class="op">=</span> txn</span>
-<span id="cb22-375"><a href="#cb22-375" aria-hidden="true" tabindex="-1"></a>     <span class="fu">onChange</span>()<span class="op">;</span></span>
-<span id="cb22-376"><a href="#cb22-376" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb22-377"><a href="#cb22-377" aria-hidden="true" tabindex="-1"></a>  button<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"click"</span><span class="op">,</span> submitMove)</span>
-<span id="cb22-378"><a href="#cb22-378" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb22-379"><a href="#cb22-379" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> txnViewer <span class="op">=</span> <span class="fu">txnView</span>(contractState<span class="op">,</span> state)<span class="op">;</span></span>
-<span id="cb22-380"><a href="#cb22-380" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb22-381"><a href="#cb22-381" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div style="display:flex; flex-direction: column; justify-content: center; align-items: center;"&gt;</span></span>
-<span id="cb22-382"><a href="#cb22-382" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h1 style="font-size: 5em;color: red"&gt;Tic-Tac-Toe&lt;/h1&gt;</span></span>
-<span id="cb22-383"><a href="#cb22-383" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h2&gt; Winner is </span><span class="sc">${</span>charLut[state<span class="op">.</span><span class="at">winner</span>]<span class="sc">}</span><span class="vs">&lt;/h2&gt; </span></span>
-<span id="cb22-384"><a href="#cb22-384" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Current Game Id : </span><span class="sc">${</span>contractState[<span class="dv">0</span>]<span class="op">.</span><span class="fu">toNumber</span>()<span class="sc">}</span><span class="vs">&lt;/h2&gt;</span></span>
-<span id="cb22-385"><a href="#cb22-385" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>button<span class="sc">}</span></span>
-<span id="cb22-386"><a href="#cb22-386" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>txnViewer<span class="sc">}</span></span>
-<span id="cb22-387"><a href="#cb22-387" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span><span class="fu">turnView</span>(contractState<span class="op">,</span> state)<span class="sc">}</span></span>
-<span id="cb22-388"><a href="#cb22-388" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div style="</span></span>
-<span id="cb22-389"><a href="#cb22-389" aria-hidden="true" tabindex="-1"></a><span class="vs">      display:inline-flex;</span></span>
-<span id="cb22-390"><a href="#cb22-390" aria-hidden="true" tabindex="-1"></a><span class="vs">      justify-content: center;</span></span>
-<span id="cb22-391"><a href="#cb22-391" aria-hidden="true" tabindex="-1"></a><span class="vs">      align-items: center;</span></span>
-<span id="cb22-392"><a href="#cb22-392" aria-hidden="true" tabindex="-1"></a><span class="vs">      border: 2px solid black;</span></span>
-<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a><span class="vs">    "&gt;</span><span class="sc">${</span>d3<span class="op">.</span><span class="fu">range</span>(GRID_WIDTH)<span class="op">.</span><span class="fu">map</span>((row) <span class="kw">=&gt;</span> {</span>
-<span id="cb22-394"><a href="#cb22-394" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div&gt;</span><span class="sc">${</span>d3<span class="op">.</span><span class="fu">range</span>(GRID_HEIGHT)<span class="op">.</span><span class="fu">map</span>((col) <span class="kw">=&gt;</span></span>
-<span id="cb22-395"><a href="#cb22-395" aria-hidden="true" tabindex="-1"></a>        <span class="fu">renderBox</span>(contractState<span class="op">,</span> [col<span class="op">,</span> row]<span class="op">,</span> state<span class="op">.</span><span class="at">board</span>[col][row]<span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb22-396"><a href="#cb22-396" aria-hidden="true" tabindex="-1"></a>          <span class="fu">handleTurn</span>(contractState<span class="op">,</span> state<span class="op">,</span> col<span class="op">,</span> row)<span class="op">;</span> </span>
-<span id="cb22-397"><a href="#cb22-397" aria-hidden="true" tabindex="-1"></a>          <span class="fu">onChange</span>()<span class="op">;</span></span>
-<span id="cb22-398"><a href="#cb22-398" aria-hidden="true" tabindex="-1"></a>          <span class="co">//}</span></span>
-<span id="cb22-399"><a href="#cb22-399" aria-hidden="true" tabindex="-1"></a>        })</span>
-<span id="cb22-400"><a href="#cb22-400" aria-hidden="true" tabindex="-1"></a>      )<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
-<span id="cb22-401"><a href="#cb22-401" aria-hidden="true" tabindex="-1"></a>    })<span class="sc">}</span></span>
-<span id="cb22-402"><a href="#cb22-402" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
-<span id="cb22-403"><a href="#cb22-403" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span></span>
-<span id="cb22-404"><a href="#cb22-404" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22" data-startfrom="362" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 361;"><span id="cb22-362"><a href="#cb22-362" aria-hidden="true" tabindex="-1"></a>turnView <span class="op">=</span> (contractState<span class="op">,</span> viewState) <span class="kw">=&gt;</span> {</span>
+<span id="cb22-363"><a href="#cb22-363" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> ourTurn <span class="op">=</span> contractState[<span class="dv">3</span>]<span class="op">;</span></span>
+<span id="cb22-364"><a href="#cb22-364" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div&gt;</span><span class="sc">${</span>ourTurn <span class="op">?</span> <span class="st">"Your turn."</span> <span class="op">:</span> <span class="st">"Their turn"</span><span class="sc">}</span><span class="vs">&lt;/div&gt;`</span></span>
+<span id="cb22-365"><a href="#cb22-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-366"><a href="#cb22-366" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-21" data-nodetype="declaration">
 
@@ -680,24 +651,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23" data-startfrom="410" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 409;"><span id="cb23-410"><a href="#cb23-410" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">cr_to_binary</span>(col<span class="op">,</span> row) {</span>
-<span id="cb23-411"><a href="#cb23-411" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> increase<span class="op">;</span></span>
-<span id="cb23-412"><a href="#cb23-412" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span> (col) {</span>
-<span id="cb23-413"><a href="#cb23-413" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">0</span><span class="op">:</span> </span>
-<span id="cb23-414"><a href="#cb23-414" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb23-415"><a href="#cb23-415" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb23-416"><a href="#cb23-416" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span></span>
-<span id="cb23-417"><a href="#cb23-417" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
-<span id="cb23-418"><a href="#cb23-418" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb23-419"><a href="#cb23-419" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">2</span><span class="op">:</span></span>
-<span id="cb23-420"><a href="#cb23-420" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb23-421"><a href="#cb23-421" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb23-422"><a href="#cb23-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-423"><a href="#cb23-423" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb23-424"><a href="#cb23-424" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb23-425"><a href="#cb23-425" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> binary_idx <span class="op">=</span> row <span class="op">+</span> increase<span class="op">;</span></span>
-<span id="cb23-426"><a href="#cb23-426" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>(<span class="dv">2</span><span class="op">,</span> binary_idx)<span class="op">;</span></span>
-<span id="cb23-427"><a href="#cb23-427" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23" data-startfrom="372" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 371;"><span id="cb23-372"><a href="#cb23-372" aria-hidden="true" tabindex="-1"></a>renderGrid <span class="op">=</span> (contractState<span class="op">,</span> state<span class="op">,</span> onChange) <span class="kw">=&gt;</span> {</span>
+<span id="cb23-373"><a href="#cb23-373" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> button <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;button&gt;Submit move&lt;/button&gt;`</span></span>
+<span id="cb23-374"><a href="#cb23-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-375"><a href="#cb23-375" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> submitMove <span class="op">=</span> <span class="kw">async</span> (e) <span class="kw">=&gt;</span> {</span>
+<span id="cb23-376"><a href="#cb23-376" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> gameId <span class="op">=</span> contractState[<span class="dv">0</span>]<span class="op">.</span><span class="fu">toNumber</span>()<span class="op">;</span></span>
+<span id="cb23-377"><a href="#cb23-377" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> role <span class="op">=</span> contractState[<span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb23-378"><a href="#cb23-378" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> moveToSubmit <span class="op">=</span> state<span class="op">.</span><span class="at">my_potential_move</span>[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb23-379"><a href="#cb23-379" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> boardState <span class="op">=</span> <span class="fu">boardStateForRole</span>(role<span class="op">,</span> contractState[<span class="dv">1</span>])<span class="op">;</span> </span>
+<span id="cb23-380"><a href="#cb23-380" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> playerTotalBoardState <span class="op">=</span> moveToSubmit <span class="op">+</span> boardState<span class="op">;</span></span>
+<span id="cb23-381"><a href="#cb23-381" aria-hidden="true" tabindex="-1"></a>     <span class="kw">let</span> txn <span class="op">=</span> <span class="cf">await</span> contract<span class="op">.</span><span class="fu">make_move</span>(gameId<span class="op">,</span> playerTotalBoardState)<span class="op">;</span></span>
+<span id="cb23-382"><a href="#cb23-382" aria-hidden="true" tabindex="-1"></a>     state<span class="op">.</span><span class="at">pendingTxn</span> <span class="op">=</span> txn</span>
+<span id="cb23-383"><a href="#cb23-383" aria-hidden="true" tabindex="-1"></a>     <span class="fu">onChange</span>()<span class="op">;</span></span>
+<span id="cb23-384"><a href="#cb23-384" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-385"><a href="#cb23-385" aria-hidden="true" tabindex="-1"></a>  button<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"click"</span><span class="op">,</span> submitMove)</span>
+<span id="cb23-386"><a href="#cb23-386" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-387"><a href="#cb23-387" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> txnViewer <span class="op">=</span> <span class="fu">txnView</span>(contractState<span class="op">,</span> state)<span class="op">;</span></span>
+<span id="cb23-388"><a href="#cb23-388" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb23-389"><a href="#cb23-389" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;div style="display:flex; flex-direction: column; justify-content: center; align-items: center;"&gt;</span></span>
+<span id="cb23-390"><a href="#cb23-390" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h1 style="font-size: 5em;color: red"&gt;Tic-Tac-Toe&lt;/h1&gt;</span></span>
+<span id="cb23-391"><a href="#cb23-391" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h2&gt; Winner is </span><span class="sc">${</span>charLut[state<span class="op">.</span><span class="at">winner</span>]<span class="sc">}</span><span class="vs">&lt;/h2&gt; </span></span>
+<span id="cb23-392"><a href="#cb23-392" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;h4&gt;Current Game Id : </span><span class="sc">${</span>contractState[<span class="dv">0</span>]<span class="op">.</span><span class="fu">toNumber</span>()<span class="sc">}</span><span class="vs">&lt;/h2&gt;</span></span>
+<span id="cb23-393"><a href="#cb23-393" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>button<span class="sc">}</span></span>
+<span id="cb23-394"><a href="#cb23-394" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>txnViewer<span class="sc">}</span></span>
+<span id="cb23-395"><a href="#cb23-395" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span><span class="fu">turnView</span>(contractState<span class="op">,</span> state)<span class="sc">}</span></span>
+<span id="cb23-396"><a href="#cb23-396" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div style="</span></span>
+<span id="cb23-397"><a href="#cb23-397" aria-hidden="true" tabindex="-1"></a><span class="vs">      display:inline-flex;</span></span>
+<span id="cb23-398"><a href="#cb23-398" aria-hidden="true" tabindex="-1"></a><span class="vs">      justify-content: center;</span></span>
+<span id="cb23-399"><a href="#cb23-399" aria-hidden="true" tabindex="-1"></a><span class="vs">      align-items: center;</span></span>
+<span id="cb23-400"><a href="#cb23-400" aria-hidden="true" tabindex="-1"></a><span class="vs">      border: 2px solid black;</span></span>
+<span id="cb23-401"><a href="#cb23-401" aria-hidden="true" tabindex="-1"></a><span class="vs">    "&gt;</span><span class="sc">${</span>d3<span class="op">.</span><span class="fu">range</span>(GRID_WIDTH)<span class="op">.</span><span class="fu">map</span>((row) <span class="kw">=&gt;</span> {</span>
+<span id="cb23-402"><a href="#cb23-402" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div&gt;</span><span class="sc">${</span>d3<span class="op">.</span><span class="fu">range</span>(GRID_HEIGHT)<span class="op">.</span><span class="fu">map</span>((col) <span class="kw">=&gt;</span></span>
+<span id="cb23-403"><a href="#cb23-403" aria-hidden="true" tabindex="-1"></a>        <span class="fu">renderBox</span>(contractState<span class="op">,</span> [col<span class="op">,</span> row]<span class="op">,</span> state<span class="op">.</span><span class="at">board</span>[col][row]<span class="op">,</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb23-404"><a href="#cb23-404" aria-hidden="true" tabindex="-1"></a>          <span class="fu">handleTurn</span>(contractState<span class="op">,</span> state<span class="op">,</span> col<span class="op">,</span> row)<span class="op">;</span> </span>
+<span id="cb23-405"><a href="#cb23-405" aria-hidden="true" tabindex="-1"></a>          <span class="fu">onChange</span>()<span class="op">;</span></span>
+<span id="cb23-406"><a href="#cb23-406" aria-hidden="true" tabindex="-1"></a>          <span class="co">//}</span></span>
+<span id="cb23-407"><a href="#cb23-407" aria-hidden="true" tabindex="-1"></a>        })</span>
+<span id="cb23-408"><a href="#cb23-408" aria-hidden="true" tabindex="-1"></a>      )<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb23-409"><a href="#cb23-409" aria-hidden="true" tabindex="-1"></a>    })<span class="sc">}</span></span>
+<span id="cb23-410"><a href="#cb23-410" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb23-411"><a href="#cb23-411" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span></span>
+<span id="cb23-412"><a href="#cb23-412" aria-hidden="true" tabindex="-1"></a>  }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-22" data-nodetype="declaration">
 
@@ -705,28 +699,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24" data-startfrom="431" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 430;"><span id="cb24-431"><a href="#cb24-431" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">handleTurn</span>(contractState<span class="op">,</span> state<span class="op">,</span> col<span class="op">,</span> row) {</span>
-<span id="cb24-432"><a href="#cb24-432" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> role <span class="op">=</span> contractState[<span class="dv">2</span>]<span class="op">;</span></span>
-<span id="cb24-433"><a href="#cb24-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-434"><a href="#cb24-434" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">===</span> <span class="dv">0</span>) {</span>
-<span id="cb24-435"><a href="#cb24-435" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">=</span> role<span class="op">;</span></span>
-<span id="cb24-436"><a href="#cb24-436" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">my_potential_move</span> <span class="op">=</span> [ <span class="fu">cr_to_binary</span>(col<span class="op">,</span> row)  <span class="op">,</span> [col<span class="op">,</span> row] ]</span>
-<span id="cb24-437"><a href="#cb24-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-438"><a href="#cb24-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-439"><a href="#cb24-439" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">turn</span><span class="op">++;</span></span>
-<span id="cb24-440"><a href="#cb24-440" aria-hidden="true" tabindex="-1"></a>    <span class="co">// winGame(state);</span></span>
-<span id="cb24-441"><a href="#cb24-441" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(state<span class="op">,</span> col<span class="op">,</span> row)<span class="op">;</span></span>
-<span id="cb24-442"><a href="#cb24-442" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb24-443"><a href="#cb24-443" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> bival <span class="op">=</span> state<span class="op">.</span><span class="at">my_potential_move</span>[<span class="dv">0</span>]<span class="op">;</span></span>
-<span id="cb24-444"><a href="#cb24-444" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> [p_c<span class="op">,</span> p_r] <span class="op">=</span> state<span class="op">.</span><span class="at">my_potential_move</span>[<span class="dv">1</span>]</span>
-<span id="cb24-445"><a href="#cb24-445" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (p_c <span class="op">==</span> col <span class="op">&amp;&amp;</span> p_r <span class="op">==</span> row) {</span>
-<span id="cb24-446"><a href="#cb24-446" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">my_potential_move</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb24-447"><a href="#cb24-447" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb24-448"><a href="#cb24-448" aria-hidden="true" tabindex="-1"></a>     </span>
-<span id="cb24-449"><a href="#cb24-449" aria-hidden="true" tabindex="-1"></a>     }</span>
-<span id="cb24-450"><a href="#cb24-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-451"><a href="#cb24-451" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb24-452"><a href="#cb24-452" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24" data-startfrom="418" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 417;"><span id="cb24-418"><a href="#cb24-418" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">cr_to_binary</span>(col<span class="op">,</span> row) {</span>
+<span id="cb24-419"><a href="#cb24-419" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> increase<span class="op">;</span></span>
+<span id="cb24-420"><a href="#cb24-420" aria-hidden="true" tabindex="-1"></a>    <span class="cf">switch</span> (col) {</span>
+<span id="cb24-421"><a href="#cb24-421" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">0</span><span class="op">:</span> </span>
+<span id="cb24-422"><a href="#cb24-422" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb24-423"><a href="#cb24-423" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb24-424"><a href="#cb24-424" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span></span>
+<span id="cb24-425"><a href="#cb24-425" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb24-426"><a href="#cb24-426" aria-hidden="true" tabindex="-1"></a>            <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb24-427"><a href="#cb24-427" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="dv">2</span><span class="op">:</span></span>
+<span id="cb24-428"><a href="#cb24-428" aria-hidden="true" tabindex="-1"></a>            increase <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb24-429"><a href="#cb24-429" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
+<span id="cb24-430"><a href="#cb24-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-431"><a href="#cb24-431" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb24-432"><a href="#cb24-432" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-433"><a href="#cb24-433" aria-hidden="true" tabindex="-1"></a>    <span class="kw">var</span> binary_idx <span class="op">=</span> row <span class="op">+</span> increase<span class="op">;</span></span>
+<span id="cb24-434"><a href="#cb24-434" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">pow</span>(<span class="dv">2</span><span class="op">,</span> binary_idx)<span class="op">;</span></span>
+<span id="cb24-435"><a href="#cb24-435" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-23" data-nodetype="declaration">
 
@@ -734,7 +724,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25" data-startfrom="457" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 456;"><span id="cb25-457"><a href="#cb25-457" aria-hidden="true" tabindex="-1"></a>charLut <span class="op">=</span> [<span class="st">""</span><span class="op">,</span> <span class="st">"X"</span><span class="op">,</span> <span class="st">"O"</span><span class="op">,</span> <span class="st">"neither"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25" data-startfrom="439" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 438;"><span id="cb25-439"><a href="#cb25-439" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">handleTurn</span>(contractState<span class="op">,</span> state<span class="op">,</span> col<span class="op">,</span> row) {</span>
+<span id="cb25-440"><a href="#cb25-440" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> role <span class="op">=</span> contractState[<span class="dv">2</span>]<span class="op">;</span></span>
+<span id="cb25-441"><a href="#cb25-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-442"><a href="#cb25-442" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb25-443"><a href="#cb25-443" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">=</span> role<span class="op">;</span></span>
+<span id="cb25-444"><a href="#cb25-444" aria-hidden="true" tabindex="-1"></a>      state<span class="op">.</span><span class="at">my_potential_move</span> <span class="op">=</span> [ <span class="fu">cr_to_binary</span>(col<span class="op">,</span> row)  <span class="op">,</span> [col<span class="op">,</span> row] ]</span>
+<span id="cb25-445"><a href="#cb25-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-446"><a href="#cb25-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-447"><a href="#cb25-447" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">turn</span><span class="op">++;</span></span>
+<span id="cb25-448"><a href="#cb25-448" aria-hidden="true" tabindex="-1"></a>    <span class="co">// winGame(state);</span></span>
+<span id="cb25-449"><a href="#cb25-449" aria-hidden="true" tabindex="-1"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(state<span class="op">,</span> col<span class="op">,</span> row)<span class="op">;</span></span>
+<span id="cb25-450"><a href="#cb25-450" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb25-451"><a href="#cb25-451" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> bival <span class="op">=</span> state<span class="op">.</span><span class="at">my_potential_move</span>[<span class="dv">0</span>]<span class="op">;</span></span>
+<span id="cb25-452"><a href="#cb25-452" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> [p_c<span class="op">,</span> p_r] <span class="op">=</span> state<span class="op">.</span><span class="at">my_potential_move</span>[<span class="dv">1</span>]</span>
+<span id="cb25-453"><a href="#cb25-453" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (p_c <span class="op">==</span> col <span class="op">&amp;&amp;</span> p_r <span class="op">==</span> row) {</span>
+<span id="cb25-454"><a href="#cb25-454" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">my_potential_move</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb25-455"><a href="#cb25-455" aria-hidden="true" tabindex="-1"></a>    state<span class="op">.</span><span class="at">board</span>[col][row] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb25-456"><a href="#cb25-456" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb25-457"><a href="#cb25-457" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb25-458"><a href="#cb25-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-459"><a href="#cb25-459" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb25-460"><a href="#cb25-460" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-24" data-nodetype="declaration">
 
@@ -742,13 +753,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26" data-startfrom="461" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 460;"><span id="cb26-461"><a href="#cb26-461" aria-hidden="true" tabindex="-1"></a>createState <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
-<span id="cb26-462"><a href="#cb26-462" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> board <span class="op">=</span> d3</span>
-<span id="cb26-463"><a href="#cb26-463" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">range</span>(GRID_HEIGHT)</span>
-<span id="cb26-464"><a href="#cb26-464" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">map</span>(() <span class="kw">=&gt;</span> d3<span class="op">.</span><span class="fu">range</span>(GRID_WIDTH)<span class="op">.</span><span class="fu">map</span>(() <span class="kw">=&gt;</span> <span class="dv">0</span>))<span class="op">;</span></span>
-<span id="cb26-465"><a href="#cb26-465" aria-hidden="true" tabindex="-1"></a>  <span class="co">//state[2][2] = 1;</span></span>
-<span id="cb26-466"><a href="#cb26-466" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { board<span class="op">,</span> <span class="dt">turn</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">winner</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">x_player_state</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">o_player_state</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">my_potential_move</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">pendingTxn</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">txnState</span><span class="op">:</span> <span class="kw">null</span> }<span class="op">;</span></span>
-<span id="cb26-467"><a href="#cb26-467" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26" data-startfrom="465" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 464;"><span id="cb26-465"><a href="#cb26-465" aria-hidden="true" tabindex="-1"></a>charLut <span class="op">=</span> [<span class="st">""</span><span class="op">,</span> <span class="st">"X"</span><span class="op">,</span> <span class="st">"O"</span><span class="op">,</span> <span class="st">"neither"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-25" data-nodetype="declaration">
 
@@ -756,58 +761,72 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code hidden" id="cb27" data-startfrom="473" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 472;"><span id="cb27-473"><a href="#cb27-473" aria-hidden="true" tabindex="-1"></a>GRID_WIDTH <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb27-474"><a href="#cb27-474" aria-hidden="true" tabindex="-1"></a>GRID_HEIGHT <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb27-475"><a href="#cb27-475" aria-hidden="true" tabindex="-1"></a>X_PLAYER <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb27-476"><a href="#cb27-476" aria-hidden="true" tabindex="-1"></a>X_PLAYER_STATE <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb27-477"><a href="#cb27-477" aria-hidden="true" tabindex="-1"></a>O_PLAYER <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb27-478"><a href="#cb27-478" aria-hidden="true" tabindex="-1"></a>O_PLAYER_STATE <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb27-479"><a href="#cb27-479" aria-hidden="true" tabindex="-1"></a>NEITHER <span class="op">=</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27" data-startfrom="469" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 468;"><span id="cb27-469"><a href="#cb27-469" aria-hidden="true" tabindex="-1"></a>createState <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb27-470"><a href="#cb27-470" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> board <span class="op">=</span> d3</span>
+<span id="cb27-471"><a href="#cb27-471" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">range</span>(GRID_HEIGHT)</span>
+<span id="cb27-472"><a href="#cb27-472" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">map</span>(() <span class="kw">=&gt;</span> d3<span class="op">.</span><span class="fu">range</span>(GRID_WIDTH)<span class="op">.</span><span class="fu">map</span>(() <span class="kw">=&gt;</span> <span class="dv">0</span>))<span class="op">;</span></span>
+<span id="cb27-473"><a href="#cb27-473" aria-hidden="true" tabindex="-1"></a>  <span class="co">//state[2][2] = 1;</span></span>
+<span id="cb27-474"><a href="#cb27-474" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> { board<span class="op">,</span> <span class="dt">turn</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">winner</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">x_player_state</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">o_player_state</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">my_potential_move</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">pendingTxn</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">txnState</span><span class="op">:</span> <span class="kw">null</span> }<span class="op">;</span></span>
+<span id="cb27-475"><a href="#cb27-475" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div id="ojs-cell-26" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code hidden" id="cb28" data-startfrom="481" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 480;"><span id="cb28-481"><a href="#cb28-481" aria-hidden="true" tabindex="-1"></a>GRID_WIDTH <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb28-482"><a href="#cb28-482" aria-hidden="true" tabindex="-1"></a>GRID_HEIGHT <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb28-483"><a href="#cb28-483" aria-hidden="true" tabindex="-1"></a>X_PLAYER <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb28-484"><a href="#cb28-484" aria-hidden="true" tabindex="-1"></a>X_PLAYER_STATE <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb28-485"><a href="#cb28-485" aria-hidden="true" tabindex="-1"></a>O_PLAYER <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb28-486"><a href="#cb28-486" aria-hidden="true" tabindex="-1"></a>O_PLAYER_STATE <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb28-487"><a href="#cb28-487" aria-hidden="true" tabindex="-1"></a>NEITHER <span class="op">=</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-26-1" data-nodetype="declaration">
+<div id="ojs-cell-27-1" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-26-2" data-nodetype="declaration">
+<div id="ojs-cell-27-2" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-26-3" data-nodetype="declaration">
+<div id="ojs-cell-27-3" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-26-4" data-nodetype="declaration">
+<div id="ojs-cell-27-4" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-26-5" data-nodetype="declaration">
+<div id="ojs-cell-27-5" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-26-6" data-nodetype="declaration">
+<div id="ojs-cell-27-6" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<div id="ojs-cell-26-7" data-nodetype="declaration">
+<div id="ojs-cell-27-7" data-nodetype="declaration">
 
 </div>
 </div>
@@ -821,7 +840,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </main> <!-- /main -->
 
 <script type="ojs-module-contents">
-{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"contract = {\nvar abi = await FileAttachment(\"tictactoe_abi.json\").json()\nreturn wallet ? (new starknetjs.Contract(abi, \"0x04286312101599f80d59a5747048fe248183c4af09cab90c27c5e3e5ad234765\",\nwallet.account)) : null\n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"\nimport { connectWallet, starknetjs  } from \"/posts/0_hello_wallet/index.qmd\";\nd3 = require(\"d3@6\");\n\nviewof wallet = Inputs.button(\"Connect\", {value: null, reduce: connectWallet})\n\nviewof game_id = Inputs.range([1, 255], {step: 1, label: \"Game Id\"})\n\nasync function createGame(v) {\n    var txn = await contract.init_new_game()\n    console.log(txn);\n    return txn;\n\n}\n\nasync function joinGame(v) {\n    console.log(game_id);\n    var txn = await contract.join_game(game_id)\n    console.log(txn);\n    return txn;\n\n}\n\nviewof txn_state = Inputs.button([\n  [\"Create\", createGame],\n  [\"Join\", joinGame]\n//  [\"Submit move\", value => console.log(\"submit\")]  \n\n], {value: null, label: \"Game\"})\n\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"__card = renderGame()\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"wallet.selectedAddress\n\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"mutable operativeContractState = undefined;\noperativeContractState;\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"txn_state\n\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":" txn_status = null // pollTxn(txn_state, 1000)\n"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":"\nasync function fetchContractState () {\n\n    if (contract) {\n    let c_game_state = await getGameState();\n    let playerRole = getRole(c_game_state);    \n    let shouldMove = ourTurn(playerRole, c_game_state[1]);\n    c_game_state[1].state_x = c_game_state[1].state_x.toNumber();\n    c_game_state[1].state_o = c_game_state[1].state_o.toNumber();    \n    c_game_state.push(playerRole)\n    c_game_state.push(shouldMove)\n    mutable operativeContractState = c_game_state\n    return c_game_state;\n\n    } else {\n    \n      return [starknetjs.number.toBN(0), {}, -1];  \n    \n    }\n\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"function ourTurn(role, contractState) {\n    var last_mover = contractState.last_mover.toNumber();\n\n    if (role == 1) {\n        if (last_mover == 0  || last_mover == 2) {\n        return true;\n       }\n    \n    } else {\n    \n    if ( last_mover == 1) {\n        return true;\n    }\n    \n    }\n    \n\n    return false;\n\n\n\n\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"async function getGameState() {\n       let game_id = await contract.player_to_game_id(wallet.selectedAddress); \n       let game_state = await contract.game_id_to_game(game_id.game_idx)\n       return [game_id.game_idx, game_state.game]\n    }\n"},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"function getRole (c_game_state) {\n\n    let hex_address_o = starknetjs.number.toHex(c_game_state[1].player_o).toString().slice(2);\n    let hex_address_x = starknetjs.number.toHex(c_game_state[1].player_x).toString().slice(2);\n    let formatted_addr = wallet.selectedAddress.slice(3);\n    if (hex_address_o == formatted_addr) {\n        return 2;\n        \n    } \n    \n    if (hex_address_x == formatted_addr) {\n        return 1;\n    }\n    \n    return 0;\n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-12","inline":false,"source":"contract\n"},{"methodName":"interpret","cellName":"ojs-cell-13","inline":false,"source":"wallet\n"},{"methodName":"interpret","cellName":"ojs-cell-14","inline":false,"source":"async function handleTxn(state) {\n    let txnHash = state.pendingTxn.transaction_hash;\n    let receipt =  await wallet.provider.getTransactionReceipt(txnHash);\n    if (receipt.status == 'REJECTED' || receipt.status == 'ACCEPTED_ON_L2') {\n    \n        state.pendingTxn = null;\n        state.txnState = null;\n    \n    } else {\n    \n        state.txnState = receipt;\n    \n    }\n    \n\n\n}\n\n\n"},{"methodName":"interpret","cellName":"ojs-cell-15","inline":false,"source":"async function* pollTxn(tx, timeout) {\n while(true) {\n  var last_response = ''; \n  let receipt = await wallet.provider.getTransactionReceipt(tx.transaction_hash)\n  if (receipt.status == 'REJECTED' || receipt.status == 'ACCEPTED_ON_L2') {\n    return receipt;\n  } else {\n    await Promises.delay(timeout);\n    if (last_response != receipt.status) {\n    yield receipt;\n    }\n    last_response = receipt.status;\n   \n  }\n  }\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-16","inline":false,"source":"async function* renderGame() {\n  const viewState = createState();\n  var contractState = [starknetjs.number.toBN(0), {}, -1];  \n  while (true) {\n    let body = null;\n    \n    const p = new Promise(async (resolve) => {\n      console.log(\"about to render\", contractState, viewState);\n      body = renderGrid(contractState, viewState, resolve);\n      contractState = await fetchContractState();\n      if (contract) {\n      \n      if(viewState.pendingTxn) {\n      \n         await handleTxn(viewState)  \n         resolve() \n      \n      } else {\n      \n      await Promises.delay(8000);\n      resolve();\n      \n      }\n      }\n    });\n\n    yield body;\n\n    await p;\n  }\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-17","inline":false,"source":"function renderBox(contractState, cr, cellValue, onClick) {\n     let boardState = contractState[1];\n     let xState = boardState.state_x;\n     let oState = boardState.state_o;\n     let binaryRep = cr_to_binary(cr[0], cr[1]);\n     let maybeX = xState & binaryRep;\n     let maybeO = oState & binaryRep;\n\n    if (maybeX == binaryRep) {\n        cellValue = 1;\n    }\n    if (maybeO == binaryRep) {\n        cellValue = 2;\n    }\n \n\n \n  \n  const box = html`\n    <div\n      style=\"\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        width: 100px;\n        height: 100px;\n        border: 2px black solid;\n        user-select: none;\n      \">\n     <div style=\"font-size: 5em\">${charLut[cellValue]}</div>\n  </div>`;\n\n  box.addEventListener(\"click\", onClick);\n\n  //render box cares not about what the clicking does\n  return box;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-18","inline":false,"source":"function boardStateForRole(role, contractState) {\n    let boardState = undefined;\n    if (role == 1) {\n    \n        boardState = contractState.state_x\n        \n    } else if (role == 2) {\n    \n        boardState = contractState.state_o\n    \n    }\n    \n    return boardState;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-19","inline":false,"source":"txnView = (contractState, viewState) => {\n    if (viewState.pendingTxn) {\n    \n    return html`<div>Txn: ${viewState.pendingTxn.transaction_hash} Current status: ${viewState.txnState ? viewState.txnState.status : \"pending\"}</div>`\n    \n    } else {\n    \n      return \"\";  \n    }\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-20","inline":false,"source":"\nturnView = (contractState, viewState) => {\n    let ourTurn = contractState[3];\n    return html`<div>${ourTurn ? \"Your turn.\" : \"Their turn\"}</div>`\n\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-21","inline":false,"source":"\nrenderGrid = (contractState, state, onChange) => {\n  let button = html`<button>Submit move</button>`\n\n  let submitMove = async (e) => {\n     let gameId = contractState[0].toNumber();\n     let role = contractState[2];\n     let moveToSubmit = state.my_potential_move[0];\n     let boardState = boardStateForRole(role, contractState[1]); \n     let playerTotalBoardState = moveToSubmit + boardState;\n     let txn = await contract.make_move(gameId, playerTotalBoardState);\n     state.pendingTxn = txn\n     onChange();\n  }\n  button.addEventListener(\"click\", submitMove)\n  \n  let txnViewer = txnView(contractState, state);\n  return html`\n  <div style=\"display:flex; flex-direction: column; justify-content: center; align-items: center;\">\n    <h1 style=\"font-size: 5em;color: red\">Tic-Tac-Toe</h1>\n    <h2> Winner is ${charLut[state.winner]}</h2> \n    <h4>Current Game Id : ${contractState[0].toNumber()}</h2>\n    ${button}\n    ${txnViewer}\n    ${turnView(contractState, state)}\n    <div style=\"\n      display:inline-flex;\n      justify-content: center;\n      align-items: center;\n      border: 2px solid black;\n    \">${d3.range(GRID_WIDTH).map((row) => {\n      return html`<div>${d3.range(GRID_HEIGHT).map((col) =>\n        renderBox(contractState, [col, row], state.board[col][row], () => {\n          handleTurn(contractState, state, col, row); \n          onChange();\n          //}\n        })\n      )}`;\n    })}\n    </div>\n  </div>`\n  }\n\n"},{"methodName":"interpret","cellName":"ojs-cell-22","inline":false,"source":"function cr_to_binary(col, row) {\n    var increase;\n    switch (col) {\n        case 0: \n            increase = 0;\n            break;\n        case 1:\n            increase = 3;\n            break;\n        case 2:\n            increase = 6\n;\n\n    }\n    \n    var binary_idx = row + increase;\n    return Math.pow(2, binary_idx);\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-23","inline":false,"source":"function handleTurn(contractState, state, col, row) {\n  let role = contractState[2];\n\n  if (state.board[col][row] === 0) {\n      state.board[col][row] = role;\n      state.my_potential_move = [ cr_to_binary(col, row)  , [col, row] ]\n\n\n    state.turn++;\n    // winGame(state);\n    console.log(state, col, row);\n  } else {\n    let bival = state.my_potential_move[0];\n    let [p_c, p_r] = state.my_potential_move[1]\n    if (p_c == col && p_r == row) {\n    state.my_potential_move = null;\n    state.board[col][row] = 0;\n     \n     }\n\n  }\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-24","inline":false,"source":"charLut = [\"\", \"X\", \"O\", \"neither\"]\n"},{"methodName":"interpret","cellName":"ojs-cell-25","inline":false,"source":"createState = () => {\n  const board = d3\n    .range(GRID_HEIGHT)\n    .map(() => d3.range(GRID_WIDTH).map(() => 0));\n  //state[2][2] = 1;\n  return { board, turn: 0, winner: 0, x_player_state: 0, o_player_state: 0, my_potential_move: null, pendingTxn: null, txnState: null };\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-26","inline":false,"source":"GRID_WIDTH = 3\nGRID_HEIGHT = 3\nX_PLAYER = 1\nX_PLAYER_STATE = 0\nO_PLAYER = 2\nO_PLAYER_STATE = 0\nNEITHER = 3\n"},{"methodName":"interpretQuiet","source":"shinyInput('wallet')"},{"methodName":"interpretQuiet","source":"shinyInput('game_id')"},{"methodName":"interpretQuiet","source":"shinyInput('txn_state')"}]}
+{"contents":[{"methodName":"interpret","cellName":"ojs-cell-1","inline":false,"source":"contract = {\nvar abi = await FileAttachment(\"tictactoe_abi.json\").json()\nreturn wallet ? (new starknetjs.Contract(abi, \"0x02a21ef6a5f000e6647857c88b46a66c54df282d88ca6be7d86079672e5f51b4\",\nwallet.account)) : null\n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-2","inline":false,"source":"\nimport { connectWallet, starknetjs  } from \"/posts/0_hello_wallet/index.qmd\";\nd3 = require(\"d3@6\");\n\nviewof wallet = Inputs.button(\"Connect\", {value: null, reduce: connectWallet})\n\nviewof game_id = Inputs.range([1, 255], {step: 1, label: \"Game Id\"})\n\nasync function createGame(v) {\n    var txn = await contract.init_new_game()\n    console.log(txn);\n    return txn;\n\n}\n\nasync function joinGame(v) {\n    console.log(game_id);\n    var txn = await contract.join_game(game_id)\n    console.log(txn);\n    return txn;\n\n}\n\nviewof txn_state = Inputs.button([\n  [\"Create\", createGame],\n  [\"Join\", joinGame]\n//  [\"Submit move\", value => console.log(\"submit\")]  \n\n], {value: null, label: \"Game\"})\n\n"},{"methodName":"interpret","cellName":"ojs-cell-3","inline":false,"source":"__card = renderGame()\n"},{"methodName":"interpret","cellName":"ojs-cell-4","inline":false,"source":"// \"0xdabba9ce03ade36611d5d401193a84cd9e1d9ee37a87ce9bbab55690fcfae0\"\nselector_name = starknetjs.hash.getSelectorFromName(\"game_over\");\nselector_name;\n"},{"methodName":"interpret","cellName":"ojs-cell-5","inline":false,"source":"wallet.selectedAddress\n\n"},{"methodName":"interpret","cellName":"ojs-cell-6","inline":false,"source":"mutable operativeContractState = undefined;\noperativeContractState;\n"},{"methodName":"interpret","cellName":"ojs-cell-7","inline":false,"source":"txn_state\n\n"},{"methodName":"interpret","cellName":"ojs-cell-8","inline":false,"source":" txn_status = null // pollTxn(txn_state, 1000)\n"},{"methodName":"interpret","cellName":"ojs-cell-9","inline":false,"source":"\nasync function fetchContractState () {\n\n    if (contract) {\n    let c_game_state = await getGameState();\n    let playerRole = getRole(c_game_state);    \n    let shouldMove = ourTurn(playerRole, c_game_state[1]);\n    c_game_state[1].state_x = c_game_state[1].state_x.toNumber();\n    c_game_state[1].state_o = c_game_state[1].state_o.toNumber();    \n    c_game_state.push(playerRole)\n    c_game_state.push(shouldMove)\n    mutable operativeContractState = c_game_state\n    return c_game_state;\n\n    } else {\n    \n      return [starknetjs.number.toBN(0), {}, -1];  \n    \n    }\n\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-10","inline":false,"source":"function ourTurn(role, contractState) {\n    var last_mover = contractState.last_mover.toNumber();\n\n    if (role == 1) {\n        if (last_mover == 0  || last_mover == 2) {\n        return true;\n       }\n    \n    } else {\n    \n    if ( last_mover == 1) {\n        return true;\n    }\n    \n    }\n    \n\n    return false;\n\n\n\n\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-11","inline":false,"source":"async function getGameState() {\n       let game_id = await contract.player_to_game_id(wallet.selectedAddress); \n       let game_state = await contract.game_id_to_game(game_id.game_idx)\n       return [game_id.game_idx, game_state.game]\n    }\n"},{"methodName":"interpret","cellName":"ojs-cell-12","inline":false,"source":"function getRole (c_game_state) {\n\n    let hex_address_o = starknetjs.number.toHex(c_game_state[1].player_o).toString().slice(2);\n    let hex_address_x = starknetjs.number.toHex(c_game_state[1].player_x).toString().slice(2);\n    let formatted_addr = wallet.selectedAddress.slice(3);\n    if (hex_address_o == formatted_addr) {\n        return 2;\n        \n    } \n    \n    if (hex_address_x == formatted_addr) {\n        return 1;\n    }\n    \n    return 0;\n\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-13","inline":false,"source":"contract\n"},{"methodName":"interpret","cellName":"ojs-cell-14","inline":false,"source":"wallet\n"},{"methodName":"interpret","cellName":"ojs-cell-15","inline":false,"source":"async function handleTxn(state) {\n    let txnHash = state.pendingTxn.transaction_hash;\n    let receipt =  await wallet.provider.getTransactionReceipt(txnHash);\n    if (receipt.status == 'REJECTED' || receipt.status == 'ACCEPTED_ON_L2') {\n\n        state.pendingTxn = null;\n        // state.txnState = null;\n    \n    } else {\n    \n        state.txnState = receipt;\n        console.log(receipt);\n    \n    }\n    \n\n\n}\n\n\n"},{"methodName":"interpret","cellName":"ojs-cell-16","inline":false,"source":"async function* pollTxn(tx, timeout) {\n while(true) {\n  var last_response = ''; \n  let receipt = await wallet.provider.getTransactionReceipt(tx.transaction_hash)\n  if (receipt.status == 'REJECTED' || receipt.status == 'ACCEPTED_ON_L2') {\n    return receipt;\n  } else {\n    await Promises.delay(timeout);\n    if (last_response != receipt.status) {\n    yield receipt;\n    }\n    last_response = receipt.status;\n   \n  }\n  }\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-17","inline":false,"source":"async function* renderGame() {\n  const viewState = createState();\n  var contractState = [starknetjs.number.toBN(0), {}, -1];  \n  while (true) {\n    let body = null;\n    \n    const p = new Promise(async (resolve) => {\n      console.log(\"about to render\", contractState, viewState);\n      body = renderGrid(contractState, viewState, resolve);\n      contractState = await fetchContractState();\n      if (contract) {\n      \n      if(viewState.pendingTxn) {\n      \n         await handleTxn(viewState)  \n         resolve() \n      \n      } else {\n      \n      await Promises.delay(8000);\n      resolve();\n      \n      }\n      }\n    });\n\n    yield body;\n\n    await p;\n  }\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-18","inline":false,"source":"function renderBox(contractState, cr, cellValue, onClick) {\n     let boardState = contractState[1];\n     let xState = boardState.state_x;\n     let oState = boardState.state_o;\n     let binaryRep = cr_to_binary(cr[0], cr[1]);\n     let maybeX = xState & binaryRep;\n     let maybeO = oState & binaryRep;\n\n    if (maybeX == binaryRep) {\n        cellValue = 1;\n    }\n    if (maybeO == binaryRep) {\n        cellValue = 2;\n    }\n \n\n \n  \n  const box = html`\n    <div\n      style=\"\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        width: 100px;\n        height: 100px;\n        border: 2px black solid;\n        user-select: none;\n      \">\n     <div style=\"font-size: 5em\">${charLut[cellValue]}</div>\n  </div>`;\n\n  box.addEventListener(\"click\", onClick);\n\n  //render box cares not about what the clicking does\n  return box;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-19","inline":false,"source":"function boardStateForRole(role, contractState) {\n    let boardState = undefined;\n    if (role == 1) {\n    \n        boardState = contractState.state_x\n        \n    } else if (role == 2) {\n    \n        boardState = contractState.state_o\n    \n    }\n    \n    return boardState;\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-20","inline":false,"source":"txnView = (contractState, viewState) => {\n    if (viewState.pendingTxn) {\n    \n    return html`<div>Txn: ${viewState.pendingTxn.transaction_hash} Current status: ${viewState.txnState ? viewState.txnState.status : \"pending\"}</div>`\n    \n    } else {\n    \n      return \"\";  \n    }\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-21","inline":false,"source":"\nturnView = (contractState, viewState) => {\n    let ourTurn = contractState[3];\n    return html`<div>${ourTurn ? \"Your turn.\" : \"Their turn\"}</div>`\n\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-22","inline":false,"source":"\nrenderGrid = (contractState, state, onChange) => {\n  let button = html`<button>Submit move</button>`\n\n  let submitMove = async (e) => {\n     let gameId = contractState[0].toNumber();\n     let role = contractState[2];\n     let moveToSubmit = state.my_potential_move[0];\n     let boardState = boardStateForRole(role, contractState[1]); \n     let playerTotalBoardState = moveToSubmit + boardState;\n     let txn = await contract.make_move(gameId, playerTotalBoardState);\n     state.pendingTxn = txn\n     onChange();\n  }\n  button.addEventListener(\"click\", submitMove)\n  \n  let txnViewer = txnView(contractState, state);\n  return html`\n  <div style=\"display:flex; flex-direction: column; justify-content: center; align-items: center;\">\n    <h1 style=\"font-size: 5em;color: red\">Tic-Tac-Toe</h1>\n    <h2> Winner is ${charLut[state.winner]}</h2> \n    <h4>Current Game Id : ${contractState[0].toNumber()}</h2>\n    ${button}\n    ${txnViewer}\n    ${turnView(contractState, state)}\n    <div style=\"\n      display:inline-flex;\n      justify-content: center;\n      align-items: center;\n      border: 2px solid black;\n    \">${d3.range(GRID_WIDTH).map((row) => {\n      return html`<div>${d3.range(GRID_HEIGHT).map((col) =>\n        renderBox(contractState, [col, row], state.board[col][row], () => {\n          handleTurn(contractState, state, col, row); \n          onChange();\n          //}\n        })\n      )}`;\n    })}\n    </div>\n  </div>`\n  }\n\n"},{"methodName":"interpret","cellName":"ojs-cell-23","inline":false,"source":"function cr_to_binary(col, row) {\n    var increase;\n    switch (col) {\n        case 0: \n            increase = 0;\n            break;\n        case 1:\n            increase = 3;\n            break;\n        case 2:\n            increase = 6\n;\n\n    }\n    \n    var binary_idx = row + increase;\n    return Math.pow(2, binary_idx);\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-24","inline":false,"source":"function handleTurn(contractState, state, col, row) {\n  let role = contractState[2];\n\n  if (state.board[col][row] === 0) {\n      state.board[col][row] = role;\n      state.my_potential_move = [ cr_to_binary(col, row)  , [col, row] ]\n\n\n    state.turn++;\n    // winGame(state);\n    console.log(state, col, row);\n  } else {\n    let bival = state.my_potential_move[0];\n    let [p_c, p_r] = state.my_potential_move[1]\n    if (p_c == col && p_r == row) {\n    state.my_potential_move = null;\n    state.board[col][row] = 0;\n     \n     }\n\n  }\n}\n\n"},{"methodName":"interpret","cellName":"ojs-cell-25","inline":false,"source":"charLut = [\"\", \"X\", \"O\", \"neither\"]\n"},{"methodName":"interpret","cellName":"ojs-cell-26","inline":false,"source":"createState = () => {\n  const board = d3\n    .range(GRID_HEIGHT)\n    .map(() => d3.range(GRID_WIDTH).map(() => 0));\n  //state[2][2] = 1;\n  return { board, turn: 0, winner: 0, x_player_state: 0, o_player_state: 0, my_potential_move: null, pendingTxn: null, txnState: null };\n}\n"},{"methodName":"interpret","cellName":"ojs-cell-27","inline":false,"source":"GRID_WIDTH = 3\nGRID_HEIGHT = 3\nX_PLAYER = 1\nX_PLAYER_STATE = 0\nO_PLAYER = 2\nO_PLAYER_STATE = 0\nNEITHER = 3\n"},{"methodName":"interpretQuiet","source":"shinyInput('wallet')"},{"methodName":"interpretQuiet","source":"shinyInput('game_id')"},{"methodName":"interpretQuiet","source":"shinyInput('txn_state')"}]}
 </script>
 <script type="module">
 window._ojs.paths.runtimeToDoc = "../../posts/1_tictactoe";

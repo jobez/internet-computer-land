@@ -60,12 +60,6 @@ __card = renderGame()
 
 ## debugging
 
-```{ojs}
-//| echo: true
-// "0xdabba9ce03ade36611d5d401193a84cd9e1d9ee37a87ce9bbab55690fcfae0"
-selector_name = starknetjs.hash.getSelectorFromName("game_over");
-selector_name;
-```
 
 ```{ojs}
 wallet.selectedAddress
@@ -185,11 +179,13 @@ wallet
 
 ## tic tac toe
 
+NOTE: the above UI is coded against a locally deployed contract. I'll remove this note when I deployed to a publicly available testnet.
+
 There is a cool solidity tutorial that goes through implementing [tictactoe](https://book.tictactoken.co/) which inspired me to try to do a tictactoe web client and cairo/starknet contract.
 
 There was [an excellent observablehq notebook](https://observablehq.com/@alaricmoore/tic-tac-toe)  that I am only slightly editing here. It really demonstrates observablehq's really elegant async abstractions, [generators](https://observablehq.com/@observablehq/introduction-to-generators).
 
-I won't go to into them here, but I am hopeful/curious about whether these abstractions can give good flexibility in working with the inherently asynchronous nature of blockchain interaction.
+I'll be referencing my cairo code as of [this commit](https://github.com/jobez/bw-tictactoe/commit/3a769b644f9a31b2801e142754feec6742fb437e).
 
 ## whats in a game?
 
@@ -201,7 +197,277 @@ struct Game {
     player_o: felt,
     state_x: felt,
     state_o: felt,
-    completed: felt,
+    last_mover: felt,
+    winner: felt,
+}
+
+```
+Each role (X and O), to be assigned to a player, needs a player to interact with the contract via an account so we can assign an address for a role.
+
+Methods 'exposed' for account interaction are tagged with `external` in cairo and you can use `get_caller_address` to get the address intrinsic to the interaction. We have two external methods exposed for users to create and join games.
+
+```
+@external
+func init_new_game{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() {
+   let address : felt = get_caller_address();     
+   let game_idx : felt = game_count.read();
+
+   assert_not_zero(address);     
+    
+   let potential_game_idx : felt = player_to_game_idx.read(address);
+ 
+   with_attr error_message ("a player can only have one active game") {
+        assert potential_game_idx = 0;
+   }
+
+ %{ print(f"passing value: {ids.address=} {ids.game_idx=} ") %}
+   let new_game : Game = Game(address, 0, 0, 0, 0, 0);
+    
+   game_state.write(game_idx+1, new_game);
+   player_to_game_idx.write(address, game_idx+1); 
+   game_count.write(game_idx+2); 
+
+   return (); 
+}
+```
+
+We need to keep track of `game_count` so we can establish identifiers for games upon initialization in `init_game` and that identifier is used as an argument in `join_game`.
+
+```
+@external
+func join_game{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(game_idx: felt){
+   let address : felt = get_caller_address();
+   let game : Game = game_state.read(game_idx);
+   with_attr error_message ("a game must exist to join") {
+       assert_not_zero(game.player_x);
+   }
+
+    with_attr error_message ("you cannot join the same game") {
+       assert_not_equal(game.player_x, address);
+   }
+
+   with_attr error_message ("a spot must be available to join") {
+       assert game.player_o = 0;
+   }
+
+   let joined_game : Game = Game(game.player_x, address, game.state_x, game.state_o, game.last_mover, game.winner);
+   game_state.write(game_idx, joined_game); 
+  player_to_game_idx.write(address, game_idx);
+
+   return (); 
+}
+```
+
+
+Each role has its own state. The state is encoded into an integer, where the value represents the X or O move on a tictactoe board. Each 'spot' on the board (counted from 0 to 8) is treated as power of two. 
+
+We check for state of each player for a win state by encoding the winning configurations in their representation and 'bitwise_and` the state against a winning state. If the result of that bitwise_and is the winning state, the player has won the game.
+
+```
+func _check_winner{bitwise_ptr: BitwiseBuiltin*}(state: felt, idx: felt, winners: felt*) -> felt {
+    let win_state : felt = [winners];
+    
+    let win_check : felt = bitwise_and(state, win_state);
+
+    %{ print(f"passing value: {ids.state=} {ids.win_state=} {ids.win_check=}") %}
+    if (win_check == win_state) {
+       return 1; 
+    }
+
+    if (idx == 0) {
+       return (0); 
+    } else {
+       let result : felt =  _check_winner(state=state, idx=idx-1, winners=winners+1);
+       return (result); 
+    }
+   
+}
+
+func check_winner{bitwise_ptr: BitwiseBuiltin*}(state: felt) -> felt {
+    alloc_locals;
+    let winners: felt* = alloc();
+
+    assert winners[0] = 448; 
+    // 111 000 000
+    assert winners[1] = 56;
+    // 000 111 000
+    assert winners[2] = 7;
+    // 000 000 111
+    assert winners[3] = 292;
+    // 100 100 100
+    assert winners[4] = 146;
+    // 010 010 010
+    assert winners[5] = 73;
+    // 001 001 001
+    assert winners[6] = 273;
+    // 100 010 001
+    assert winners[7] = 84;
+    // 001010100
+
+    let res : felt = _check_winner(state=state, idx=7, winners=winners);
+    return (res);
+
+}
+```
+
+This `check_winner` logic is part of the overall logic in `make_move`. Note that if you interact with this contract outside the client, since there isn't sanity checking that a player makes a valid move from one move to the next. This means if there was *any* stakes involved in this contract, smart people will just spam the contract with winning game states and disgruntled people will look to publicly spank me.
+
+```
+@external
+func make_move{syscall_ptr : felt*, bitwise_ptr: BitwiseBuiltin*, pedersen_ptr : HashBuiltin*, range_check_ptr}(game_idx: felt, updated_game_state : felt) {
+   alloc_locals;
+   let address : felt = get_caller_address();     
+   assert_not_zero(address);     
+   let game : Game = game_state.read(game_idx); 
+   let role : felt = derive_address_role(game, address);
+   
+    
+    enforce_permissable_move(role, game);
+
+    let (new_game : Game, game_over : felt) = update_game(role, game, updated_game_state);
+
+    game_state.write(game_idx, new_game);   
+    
+    handle_end_game(game_over, address, role, game_idx, new_game);
+    
+
+    return ();
+
+}
+```
+
+We need to derive the role of player in the game from address via `derive_address_role` This function also gives us an error if the actor interacting with the contract doesn't belong to the denoted game at all:
+
+```
+func derive_address_role(game : Game, address : felt) -> felt {
+    if (address == game.player_x) {
+        return (PLAYER_X);
+    
+    }
+
+    if (address == game.player_o) {
+        return (PLAYER_O);
+        
+    }
+
+   with_attr error_message ("this player is not registered in this game") {
+        assert 1 = 0;
+   }    
+   
+   return (0); 
+
+}
+```
+
+In the case the address has a role in the game, we check to see if it is the players turn.
+
+```
+func enforce_permissable_move(role: felt, game: Game) {
+
+   with_attr error_message ("not your turn") {
+      assert_not_equal(role, game.last_mover);
+   }
+
+   with_attr error_message ("game over") {
+      assert game.winner = 0;
+   }    
+
+    return ();
+}
+```
+
+All that safe-guarding out of the way, we update the game and check if the player has made a winning move.
+
+```
+func update_game{bitwise_ptr: BitwiseBuiltin*}(role : felt, prior_game : Game, new_move :felt) -> (new_game: Game, end_game: felt) {
+    if (role == PLAYER_X) {
+       let winning_move = check_winner(new_move); 
+       let maybe_won = winning_move * role; 
+       let new_game = Game(prior_game.player_x, prior_game.player_o, new_move, prior_game.state_o, PLAYER_X, maybe_won);
+       return (new_game=new_game, end_game=winning_move);
+    } else {
+       let winning_move = check_winner(new_move); 
+       let maybe_won = winning_move * role;
+       let new_game = Game(prior_game.player_x, prior_game.player_o, prior_game.state_x, new_move, PLAYER_O, maybe_won);
+       return (new_game=new_game, end_game=winning_move);
+    }
+
+}
+```
+
+The `handle_end_game` function releases a player from being associatted with completed games, as well as emiting a game over event. The `tempvar` stuff is incidental complexity in the cairo vm involving how it tracks references (perhaps to be expanded in another post).
+
+```
+func handle_end_game{ syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(game_ended : felt, maybe_winner : felt, maybe_winner_role : felt, game_id : felt, game : Game) {
+    if (game_ended == 1) {
+       player_to_game_idx.write(game.player_x, 0);
+       player_to_game_idx.write(game.player_o, 0);
+       game_over.emit(game_id=game_id, role=maybe_winner_role, winner=maybe_winner);
+       tempvar syscall_ptr=syscall_ptr;
+       tempvar pedersen_ptr=pedersen_ptr;
+       tempvar range_check_ptr=range_check_ptr;    
+    
+    } else {
+    tempvar syscall_ptr=syscall_ptr;
+    tempvar pedersen_ptr=pedersen_ptr;
+    tempvar range_check_ptr=range_check_ptr;
+
+    } 
+
+    
+    return ();
+}
+```
+
+The game_over event gives a client a way to know that a given move ends the game. This happens when a user submits a transaction and we query for a receipt of the transaction. Events are communicated in the receipt of transactions and obtusely look something like this:
+
+```
+{"execution_resources": {"n_memory_holes": 46, "n_steps": 1036, "builtin_instance_counter": {"pedersen_builtin": 4, "range_check_builtin": 15, "bitwise_builtin": 6, "ecdsa_builtin": 1}}, "actual_fee": "0x4052f28072000", "block_hash": "0x11", "block_number": 17, "events": [{"keys": ["0xdabba9ce03ade36611d5d401193a84cd9e1d9ee37a87ce9bbab55690fcfae0"], "from_address": "0x2a21ef6a5f000e6647857c88b46a66c54df282d88ca6be7d86079672e5f51b4", "data": ["0x1", "0x1", "0x38aa61d589ed7010703ec364fa37a474b7c66b4079579ff472d65731919dfdf"]}, {"keys": ["0x99cd8bde557814842a3121e8ddfd433a539b8c9f14bf31ebf108d12e6196e9"], "from_address": "0x62230ea046a9a5fbc261ac77d03c8d41e5d442db2284587570ab46455fd2488", "data": ["0x38aa61d589ed7010703ec364fa37a474b7c66b4079579ff472d65731919dfdf", "0x388ca486b82e20cc81965d056b4cdcaacdffe0cf08e20ed8ba10ea97a487004", "0x4052f28072000", "0x0"]}], "status": "ACCEPTED_ON_L2", "transaction_index": 0, "transaction_hash": "0x2e1d29606ae45b8ed95b598a20e337bea7a9ac92fae6dde10527daab4a1ee14", "l2_to_l1_messages": []}
+```
+The 'keys' of events can be derived like so:
+
+```{ojs}
+//| echo: true
+// "0xdabba9ce03ade36611d5d401193a84cd9e1d9ee37a87ce9bbab55690fcfae0"
+selector_name = starknetjs.hash.getSelectorFromName("game_over");
+selector_name;
+```
+### viewing a conttract
+
+The view logic here might be a little too complex. Essentially it is one render loop that uses `observablehq` primitives. We get the state of a given game, the client state of the view, and pass it to render logic. If we have a pendingTxn in state, we get the receipt, then rerender, or we just wait 3 seconds and rerender.
+
+
+```{ojs}
+async function* renderGame() {
+  const viewState = createState();
+  var contractState = [starknetjs.number.toBN(0), {}, -1];  
+  while (true) {
+    let body = null;
+    
+    const p = new Promise(async (resolve) => {
+      console.log("about to render", contractState, viewState);
+      body = renderGrid(contractState, viewState, resolve);
+      contractState = await fetchContractState();
+      if (contract) {
+      
+      if(viewState.pendingTxn) {
+      
+         await handleTxn(viewState)  
+         resolve() 
+      
+      } else {
+      
+      await Promises.delay(3000);
+      resolve();
+      
+      }
+      }
+    });
+
+    yield body;
+
+    await p;
+  }
 }
 ```
 
@@ -228,65 +494,6 @@ async function handleTxn(state) {
 
 ```
 
-
-```{ojs}
-async function* pollTxn(tx, timeout) {
- while(true) {
-  var last_response = ''; 
-  let receipt = await wallet.provider.getTransactionReceipt(tx.transaction_hash)
-  if (receipt.status == 'REJECTED' || receipt.status == 'ACCEPTED_ON_L2') {
-    return receipt;
-  } else {
-    await Promises.delay(timeout);
-    if (last_response != receipt.status) {
-    yield receipt;
-    }
-    last_response = receipt.status;
-   
-  }
-  }
-}
-```
-
-
-### coordinating game session
-
-A game needs two players. Since the game is going to be played 'across' a contract, we need to allow one player to create and invite another player to a game.
-
-
-```{ojs}
-async function* renderGame() {
-  const viewState = createState();
-  var contractState = [starknetjs.number.toBN(0), {}, -1];  
-  while (true) {
-    let body = null;
-    
-    const p = new Promise(async (resolve) => {
-      console.log("about to render", contractState, viewState);
-      body = renderGrid(contractState, viewState, resolve);
-      contractState = await fetchContractState();
-      if (contract) {
-      
-      if(viewState.pendingTxn) {
-      
-         await handleTxn(viewState)  
-         resolve() 
-      
-      } else {
-      
-      await Promises.delay(8000);
-      resolve();
-      
-      }
-      }
-    });
-
-    yield body;
-
-    await p;
-  }
-}
-```
 
 ```{ojs}
 function renderBox(contractState, cr, cellValue, onClick) {

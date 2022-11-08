@@ -616,19 +616,19 @@ func make_move{syscall_ptr : felt*, bitwise_ptr: BitwiseBuiltin*, pedersen_ptr :
 }</code></pre>
 <p>The <code>handle_end_game</code> function releases a player from being associatted with completed games, as well as emiting a game over event. The <code>tempvar</code> stuff is incidental complexity in the cairo vm involving how it tracks references (perhaps to be expanded in another post).</p>
 <pre><code>func handle_end_game{ syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(game_ended : felt, maybe_winner : felt, maybe_winner_role : felt, game_id : felt, game : Game) {
-    if (game_ended == 1) {
-       player_to_game_idx.write(game.player_x, 0);
-       player_to_game_idx.write(game.player_o, 0);
-       game_over.emit(game_id=game_id, role=maybe_winner_role, winner=maybe_winner);
-       tempvar syscall_ptr=syscall_ptr;
-       tempvar pedersen_ptr=pedersen_ptr;
-       tempvar range_check_ptr=range_check_ptr;    
-    
-    } else {
+    if (game_ended == 0) {
     tempvar syscall_ptr=syscall_ptr;
     tempvar pedersen_ptr=pedersen_ptr;
     tempvar range_check_ptr=range_check_ptr;
-
+    
+    } else {
+    player_to_game_idx.write(game.player_x, 0);
+    player_to_game_idx.write(game.player_o, 0);
+    game_over.emit(game_id=game_id, role=maybe_winner_role, winner=maybe_winner);
+    tempvar syscall_ptr=syscall_ptr;
+    tempvar pedersen_ptr=pedersen_ptr;
+    tempvar range_check_ptr=range_check_ptr;    
+    
     } 
 
     
